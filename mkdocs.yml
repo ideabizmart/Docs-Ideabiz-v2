@@ -1,11 +1,119 @@
 site_name: Ideabiz Documentation
-theme:
-  name: material
+site_description: Document site for Ideabiz
+
+
 nav:
   - Home: index.md
-  - Features: feature.md
+  - APIs:
+      - "Main APIs" :
+            - "Subscription API": APIs/Main/SubscriptionAPI.md
+            - "Payment API": APIs/Main/Payment.md
+            - "SMS API": APIs/Main/SMS.md
+            - "Balance Check API": APIs/Main/Balance_Check.md
+            - "USSD API": APIs/Main/USSD.md
+            - "Pin Subscription API": APIs/Main/PIN-Subscription.md
+            - "Pin Verification API": APIs/Main/PIN-Verification.md
+            - "Pin Payment API": APIs/Main/PIN-Payment.md
+            - "Web Pin Subscription API": APIs/Main/Web_Subscription.md
+            - "Header Enrichment": APIs/Main/Header_Enrichment.md
+            - "Location API": APIs/Main/Location.md
+            - "Digital Rewards API": APIs/Main/RewardsToken_API.md
+
+      - "Other APIs":
+            - "Bill Info": APIs/BillinfoAPI.md
+            - "Roaming": APIs/Roaming.md
+
+  - Getting Started :
+      - "Creating Applications": Getting_Started/Creating_Applications.md
+      - "Generate Tokens": Getting_Started/Generate_Token.md
+      - "Token Management": Getting_Started/Token_Manegment.md
+      - "API Configuration": Getting_Started/API_config.md
+      
+  - SDK and Samples:
+      - "Dot Net C Request Handler": SDK_and_Samples/DOT NET-C-Request_Handler.md
+      - "Java Request Handler": SDK_and_Samples/JAVA-Request_Handler.md
+      - "Php Classes": SDK_and_Samples/PHP-Classes.md
+      - "Php Request Handler": SDK_and_Samples/PHP-Request_Handler.md
+
+  - Publish API:
+      - "Api Authentication": Publish_API/API_Authentication.md
+      - "Preparing Documentation": Publish_API/Preparing Documentation.md
+      - "Publish Your Api": Publish_API/Publish_your_API.md
+
+  - Go Live:
+      - "Admin Api": Go_Live/Admin_API.md
+      - "Go Live": Go_Live/GoLive.md
+
+  - Terms and Conditions:
+      - "About Us": Terms_and_Condition/About_Us.md
+      - "Terms and Conditions": Terms_and_Condition/tac.md
+      
+  - Tips:
+      - "Error Codes": Tips/error_codes.md
+      - "API Errors": Tips/introduction.md
+      - "Ideamart to IdeaBiz": Tips/IdeamarttoIdeaBiz.md
+      - "PostmanRESTClient": Tips/PostmanRESTClient.md
+      
+  - Support:
+      - "Request Support": Support/Request_Support.md
+      - "Contact Us": Support/Contact Us.md
+      - "FAQ": Support/FAQ.md
+      - "Privacy Policy": Support/Privacy_Policy.md
+
+theme:
+  name: material
+  features:
+    - navigation.tabs        # Enables horizontal top menu
+    - navigation.tabs.sticky # Keeps top menu visible on scroll
+    - navigation.sections    # Groups items into collapsible sections in the sidebar
+    - navigation.expand      # Expands sidebar sections by default
+  icon:
+    repo: fontawesome/brands/github
+  palette: 
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+      primary: teal #, [red, pink, purple, deep, purple, indigo, blue, light blue, cyan, teal, green, light green, lime, yellow, amber, orange, deep orange, brown, grey, blue, grey, black, white]
+      accent: cyan # [red, pink, purple, deep, purple, indigo, blue, light, blue, cyan, teal, green, light, green, lime, yellow, amber, orange, deep orange]
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal #, [red, pink, purple, deep, purple, indigo, blue, light blue, cyan, teal, green, light green, lime, yellow, amber, orange, deep orange, brown, grey, blue, grey, black, white]
+      accent: cyan # [red, pink, purple, deep, purple, indigo, blue, light, blue, cyan, teal, green, light, green, lime, yellow, amber, orange, deep orange]
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
 markdown_extensions:
-  - toc:
-      permalink: true
+  - md_in_html
   - admonition
+  - pymdownx.details
+  - pymdownx.keys
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables                  # Enables better table rendering
+  - pymdownx.superfences    # Fixes issues with code blocks
+  - pymdownx.highlight      # Enables syntax highlighting
+  - pymdownx.inlinehilite   # Enables inline code highlighting
+  - pymdownx.extra     
+  
+extra:
+  generator: false
+  analytics:
+    provider: google
+    property: G-N3H9NYCRB8
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/your-profile
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/your-profile
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/your-profile
+    - icon: fontawesome/brands/youtube
+      link: https://linkedin.com/in/your-profile

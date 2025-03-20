@@ -1,0 +1,5 @@
+Ideabiz platform is an enterprise enabler which allows Businesses, Corporates and other organizations to utilize commonly used Telecommunications features on a secure platform as Restful APIs. It also hosts a multitude of other useful APIs that help organizations and their applications; to improve productivity of their processes, engage and gain insight of their customers, as well as modes of payment for innovative Digital Services.
+ 
+The platform also allows Software companies and Corporates to monetize their innovative proprietary APIs by publishing them for consumption by other enterprises to enhance their services and customer engagement. Ideabiz engages in a continuous process of fostering innovation through mash-up of many such creative groundbreaking Syngergies.
+ 
+Operated by Dialog Axiata PLC, a subsidiary of Axiata Group Bhd, ideabiz platform is exposed to the international Digital Services Industry via Axiata Group bhd central hub. Dialog Axiata also operates Ideaapps, Ideapro, and Ideadroid which expose limited API capabilities in a template based easily customizable manner to enable innovation through Individuals and new start-ups. 
