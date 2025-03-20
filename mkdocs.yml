@@ -1,6 +1,7 @@
 site_name: Ideabiz Documentation
 site_description: Document site for Ideabiz
 
+docs_dir: docs
 
 nav:
   - Home: index.md
