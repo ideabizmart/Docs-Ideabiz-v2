@@ -1,4 +1,5 @@
-
+﻿# Welcome to Ideabiz Docs
+ 
 Ideabiz is an online digital enablement API Platform provided by Dialog Axiata PLC, through which business entities can create applications using the given “API” toolkits or publish “API”s to enable use of other services 
 Below outlines the steps you will follow to Consume APIs published in ideabiz
 
