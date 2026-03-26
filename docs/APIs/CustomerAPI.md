@@ -207,7 +207,7 @@ GET
    "idType":"TIN",
    "idNo":"1287",
    "contactNo":"0332222240",
-   "email":"abc@gmail.com",
+   "email":"example@gmail.com",
    "startDate":"2007-11-05 00:00:00.0",
    "status":"ACTIVE"
 }
