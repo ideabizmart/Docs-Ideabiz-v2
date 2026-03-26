@@ -418,7 +418,7 @@ Given below is a sample response of Redeem Rewards Token.
       "notifyURL": "http://rewards-creating-application.com/notifyOfRedemptionURL",
       "callbackData": "some-data-useful-to-the-requester"
     },
-    "resourceURL": "http://10.62.160.154:8080/v0.1/rewards/777334035/redeem"
+    "resourceURL": "https://ideabiz.lk/apicall/digitalrewards/v0.1/rewards/777334035/redeem"
   }
 }
 ```
@@ -699,7 +699,7 @@ Following is a sample response of Apply Rewards.
       "notifyURL": "http://rewards-creating-application.com/notifyOfRedemptionURL",
       "callbackData": "some-data-useful-to-the-requester"
     },
-    "resourceURL": "http://10.62.160.154:8080/v0.1/rewards/777334035/apply"
+    "resourceURL": "https://ideabiz.lk/apicall/digitalrewards/v0.1/rewards/777334035/apply"
   }
 }
 
