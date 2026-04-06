@@ -1,7 +1,4 @@
-/*
-Title: Payment API
-Sort: 3
-*/
+
 
 ## Content
 * [Overview](#overview)
