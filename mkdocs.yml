@@ -23,7 +23,11 @@ nav:
       - "Other APIs":
             - "Bill Info": APIs/BillinfoAPI.md
             - "Roaming": APIs/Roaming.md
-
+  - Open APIs:
+      - "Carrier Billing": APIs/Camara/Payment.md
+      - "Number Verification": APIs/Camara/OTPValidationAPInew.md
+      - "Location Verification": APIs/Camara/LocationVerifyNew.md
+      
   - Getting Started :
       - "Creating Applications": Getting_Started/Creating_Applications.md
       - "Generate Tokens": Getting_Started/Generate_Token.md
