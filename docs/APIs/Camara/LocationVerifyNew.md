@@ -1,7 +1,4 @@
-/*
-Title:Location Verify
-Sort: 8
-*/
+
 
 ## Content
 * [Overview](#overview)
