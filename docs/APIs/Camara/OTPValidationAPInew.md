@@ -1,7 +1,4 @@
-/*
-Title:PIN-Verification
-Sort: 8
-*/
+
 
 ## Content
 * [Overview](#overview)
