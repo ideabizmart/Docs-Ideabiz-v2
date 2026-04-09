@@ -43,7 +43,7 @@ Accept: application/json
 ```
 
 ### Encrypted MSISDN
-Please refer the *Secure Header* (http://docs.ideabiz.lk/APIs/Header_Enrichment) document for encrypted MSISDNs.
+Please refer the *Secure Header* [Documentation](http://docs.ideabiz.lk/APIs/Header_Enrichment) document for encrypted MSISDNs.
 
 ## Charging a subscriber
 
