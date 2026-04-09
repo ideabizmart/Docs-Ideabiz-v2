@@ -94,8 +94,7 @@ Please refer `http://docs.ideabiz.lk/Getting_Started/Token_Manegment` for author
 
 
 ## Screens
-
-###### This widget is compatible with encrypted header enrichment as well. If you wish to implement user flow 3 listed below, please discuss with support team for required special configurations.
+This widget is compatible with encrypted header enrichment as well. If you wish to implement user flow 3 listed below, please discuss with support team for required special configurations.
 
 1. Mobile User flow with PIN Authentication
 2. WiFi User flow with PIN Authentication
