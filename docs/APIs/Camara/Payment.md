@@ -26,7 +26,7 @@ The following REST method is available:
 
 **Authorization API calls** </br>
 Please note that All Ideabiz APIs require an access token to be passed on the API header along with 2 more headers. Refer below documentation to get an understanding on how to generate access tokens.
-Documentation: https://docs.ideabiz.lk/Getting_Started/Token_Manegment
+[Documentation: ](https://docs.ideabiz.lk/Getting_Started/Token_Manegment)
 
 **Request Header**
 ```
@@ -43,7 +43,7 @@ Accept: application/json
 ```
 
 ### Encrypted MSISDN
-Please refer the *Secure Header* [Documentation](http://docs.ideabiz.lk/APIs/Header_Enrichment) document for encrypted MSISDNs.
+Please refer the *Secure Header* [Documentation](https://docs.ideabiz.lk/APIs/Main/Header_Enrichment/) document for encrypted MSISDNs.
 
 ## Charging a subscriber
 
