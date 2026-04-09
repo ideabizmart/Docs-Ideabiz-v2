@@ -24,11 +24,13 @@ nav:
             - "Bill Info": APIs/BillinfoAPI.md
             - "Roaming": APIs/Roaming.md
   - Open APIs:
-      - "Carrier Billing": APIs/Camara/Payment.md
-      - "OTP Validation": APIs/Camara/OTPValidationAPInew.md
-      - "Location Verification": APIs/Camara/LocationVerifyNew.md
-      - "Number Verification": APIs/Camara/NumberverificationAPI.md
-      - "Number Lifecycle": APIs/Camara/NumberLifecycleAPI.md      
+      - Overview: APIs/Camara/index.md
+      - "APIs" :
+            - "Carrier Billing": APIs/Camara/Payment.md
+            - "OTP Validation": APIs/Camara/OTPValidationAPInew.md
+            - "Location Verification": APIs/Camara/LocationVerifyNew.md
+            - "Number Verification": APIs/Camara/NumberverificationAPI.md
+            - "Number Lifecycle": APIs/Camara/NumberLifecycleAPI.md      
       
   - Getting Started :
       - "Creating Applications": Getting_Started/Creating_Applications.md
