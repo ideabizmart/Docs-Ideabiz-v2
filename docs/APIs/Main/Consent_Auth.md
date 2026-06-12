@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Consent Auth API enables vendors to identify mobile subscribers via Header Enrichment (HE) when users browse through the mobile data network. The integration uses a two-step approach:
+Consent Auth API enables vendors to identify mobile subscribers via Header Enrichment (HE) when users browse through the mobile data network. The integration uses a two-step approach:
 
 1. **Web redirect** — detect the user's MSISDN via browser redirect chain
 2. **Backend API call** — retrieve the detected MSISDN from your server
@@ -78,7 +78,7 @@ From your backend server, call the API with the `unique_ref` to retrieve the MSI
 Obtain an OAuth2 Bearer token:
 
 ```bash
-curl -X POST "https://ideabiz.lk/token" \
+curl -X POST "https://ideabiz.lk/apicall/token" \
   -H "Content-Type: application/x-www-form-urlencoded" \
   -d "grant_type=client_credentials&client_id=YOUR_CONSUMER_KEY&client_secret=YOUR_CONSUMER_SECRET"
 ```
@@ -116,7 +116,8 @@ Authorization: Bearer {access_token}
     "connectionType": "UNKNOWN",
     "platform": "IB",
     "format": "ATEL",
-    "rvalue": "IB-A-000A-697-648-774-1704"
+    "rvalue": "IB-A-000A-697-648-774-1704",
+    "operator": "Dialog"
   }
 }
 ```
@@ -222,7 +223,8 @@ Authorization: Bearer {access_token}
       "characteristic": {
         "phoneNumber": "IB-A-000A-6a537144-e3be-4728-a136-b94d11083bf3",
         "phoneNumberMask": "9477*****67",
-        "phoneNumberFormat": "ATEL"
+        "phoneNumberFormat": "ATEL",
+        "operator": "Dialog"
       }
     }]
   }
@@ -268,6 +270,73 @@ The format of the returned MSISDN value depends on your service configuration:
 | PLAIN | `94771234567` | Raw number (restricted, internal apps only). |
 
 The `mask` field always shows a masked number (e.g. `9477*****67`) regardless of format.
+The `operator` field identifies the mobile operator (e.g. `Dialog`, `Mobitel`, `Hutch`, `Airtel`).
+
+---
+
+## Optional: Precheck & Subscription Status
+
+If configured for your app, the API response may include additional precheck and/or subscription status data.
+
+### With Precheck Status
+
+```json
+{
+  "status": "SUCCESS",
+  "statusCode": "S1000",
+  "msisdn": { "value": "...", "mask": "9477*****67", "operator": "Dialog" },
+  "precheckStatus": {
+    "status": "OK",
+    "message": "Access granted",
+    "statusCode": "S1000"
+  }
+}
+```
+
+### With Subscription Status
+
+```json
+{
+  "status": "SUCCESS",
+  "statusCode": "S1000",
+  "msisdn": { "value": "...", "mask": "9477*****67", "operator": "Dialog" },
+  "subscriptionStatus": {
+    "status": "OK",
+    "message": "Access granted",
+    "subscription": {
+      "application": "YES",
+      "serviceSubscription": "YES"
+    },
+    "statusCode": "S1000"
+  }
+}
+```
+
+### With Both
+
+```json
+{
+  "status": "SUCCESS",
+  "statusCode": "S1000",
+  "msisdn": { "value": "...", "mask": "9477*****67", "operator": "Dialog" },
+  "precheckStatus": {
+    "status": "OK",
+    "message": "Access granted",
+    "statusCode": "S1000"
+  },
+  "subscriptionStatus": {
+    "status": "OK",
+    "message": "Access granted",
+    "subscription": {
+      "application": "YES",
+      "serviceSubscription": "YES"
+    },
+    "statusCode": "S1000"
+  }
+}
+```
+
+> These fields are optional and only included if your app is configured with `additional_response` set to `PRECHECK_STATUS`, `SUBSCRIPTION_STATUS`, or `PRECHECK_AND_SUBSCRIPTION`. Contact the IdeaBiz team to enable.
 
 ---
 
@@ -493,6 +562,8 @@ Authorization: Bearer {access_token}
 - [ ] Provide your referral domain(s)
 - [ ] (Optional) Provide your server notification URL for async callbacks
 - [ ] Choose number format: ATEL (recommended), ETEL, STEL, or PLAIN
+- [ ] Choose return policy: ALL (default), PRECHECK_OK, or SUBSCRIBED_ONLY
+- [ ] Choose additional response: NONE (default), PRECHECK_STATUS, SUBSCRIPTION_STATUS, or both
 - [ ] Implement browser redirect on your landing page
 - [ ] Implement callback handler to capture `unique_ref` and `status`
 - [ ] (Optional) Implement notification endpoint (POST, respond within 2s)
@@ -503,4 +574,4 @@ Authorization: Bearer {access_token}
 
 ## Support
 
-For onboarding, configuration, or troubleshooting, contact the IdeaBiz team.
+For onboarding, configuration, or troubleshooting, contact the IdeaBiz team at idea.biz@dialog.lk.
