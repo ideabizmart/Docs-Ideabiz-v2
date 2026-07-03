@@ -21,6 +21,7 @@ nav:
             - "Location API": APIs/Main/Location.md
             - "Digital Rewards API": APIs/Main/RewardsToken_API.md
             - "Consent Auth API": APIs/Main/Consent_Auth.md
+            - "KYC API": APIs/Main/KYC.md
       - "Other APIs":
             - "Bill Info": APIs/BillinfoAPI.md
             - "Roaming": APIs/Roaming.md
