@@ -4,8 +4,6 @@
 
 The KYC / Information Verification Platform (IVP) API provides verification services for customer identity and profile-related checks using MSISDN and NIC information.
 
-The source specification is titled **API for Information Verification Platform - API Specification v3.0** for Dialog Axiata PLC and is dated **19 August 2022**.
-
 > **Security note:** These APIs process sensitive customer information such as MSISDN and NIC. Avoid logging full identifiers in application logs, mask values where possible, and ensure callback endpoints are protected with HTTPS and access controls.
 
 ## Requirements
