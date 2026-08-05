@@ -25,6 +25,12 @@ nav:
       - "Other APIs":
             - "Bill Info": APIs/BillinfoAPI.md
             - "Roaming": APIs/Roaming.md
+      - "MCP Integration":
+            - "Common Guide": APIs/MCP/guide-common.md
+            - "Ideabiz Guide": APIs/MCP/guide-ideabiz.md
+            - "Ideamart Guide": APIs/MCP/guide-ideamart.md
+            - "Client Configuration": APIs/MCP/mcp-client-config.md
+            - "Troubleshooting": APIs/MCP/troubleshooting.md
   - Open APIs:
       - Overview: APIs/Camara/index.md
       - "APIs" :
