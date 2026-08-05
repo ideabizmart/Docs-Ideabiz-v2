@@ -2,7 +2,7 @@
 
 ## Overview
 
-Consent Auth API enables vendors to identify mobile subscribers via Header Enrichment (HE) when users browse through the mobile data network. The integration uses a two-step approach:
+The MSISDN Detection API enables vendors to identify mobile subscribers via Header Enrichment (HE) when users browse through the mobile data network. The integration uses a two-step approach:
 
 1. **Web redirect** — detect the user's MSISDN via browser redirect chain
 2. **Backend API call** — retrieve the detected MSISDN from your server
@@ -32,6 +32,43 @@ Consent Auth API enables vendors to identify mobile subscribers via Header Enric
 
 Redirect the user's browser to start MSISDN detection. No server-side auth needed — your app is identified by `client_id`.
 
+### Option A: Browser Redirect (default)
+
+For web apps that have a callback URL:
+
+### Authorize Endpoint
+
+```
+GET https://consent.ideamart.io/web/v1/authorize?client_id={client_id}&ref={campaign_ref}
+```
+
+After detection, user is redirected to your configured callback URL with params.
+
+### Option B: JSON Mode (no redirect URL)
+
+For backend-only or testing integrations that don't have a web callback:
+
+Set `redirect_urls = "JSON"` in your app config. After detection, the service returns a JSON response at its own `/web/v1/result/{session}` endpoint instead of redirecting:
+
+```
+GET https://consent.ideamart.io/web/v1/result/{session_id}
+```
+
+Response:
+```json
+{
+  "ref": "your-campaign-ref",
+  "unique_ref": "HE-925a9eb8-42832",
+  "status": "DETECTED",
+  "session_id": "d66328ee-2d45-4801-90bf-f2d30979c31d",
+  "timestamp": "2026-06-11T12:00:00Z"
+}
+```
+
+> In JSON mode, cookie/localStorage detection is disabled (HE only). The user's browser will land on the JSON result page after the flow completes.
+
+---
+
 ### Authorize Endpoint
 
 ```
@@ -42,6 +79,7 @@ GET https://consent.ideamart.io/web/v1/authorize?client_id={client_id}&ref={camp
 |-----------|----------|-------------|
 | `client_id` | Yes | Your UUID (provided during onboarding) |
 | `ref` | Yes | Your campaign/session reference. Returned unchanged in callback. |
+| `protocol` | No | Force detect protocol: `http` or `https`. Only works if enabled for your app. Default: auto. |
 
 ### What Happens
 
@@ -572,6 +610,38 @@ Authorization: Bearer {access_token}
 
 ---
 
+## Troubleshooting
+
+### Common Issues
+
+| Symptom | Cause | Solution |
+|---------|-------|----------|
+| Always `NOT_DETECTED` | User on WiFi, not mobile data | MSISDN detection requires mobile data (3G/4G/5G). WiFi users cannot be detected via HE. |
+| Always `NOT_DETECTED` on mobile | Browser upgrading HTTP to HTTPS (HSTS) | Clear browser HSTS cache, or use `protocol=http` param if enabled. |
+| `403 invalid client_id` | Wrong or unregistered client_id | Verify your client_id UUID with the IdeaBiz team. |
+| Callback never fires | User closed browser mid-flow | Use the `/lookup` API with your `ref` to find the transaction. Configure server notification as backup. |
+| `400 Invalid Request` error page | User reloaded a step or used back button | Each session URL is single-use. Start a new detection flow. |
+| `E4040 transaction not found` | Wrong `unique_ref` or using another app's ref | Ensure you're using the exact `unique_ref` from the callback, and your Bearer token matches the same API Manager subscription. |
+| Detection works but no MSISDN in API | `NOT_DETECTED` status in callback | Check the `status` parameter first. Only call the API if `status=DETECTED`. |
+| Slow detection (> 2 seconds) | Decrypt service latency | Normal is < 1s. If consistently slow, contact IdeaBiz team. |
+
+### Detection Modes
+
+Your app may be configured with browser-based detection as a fallback. If so:
+
+- **First visit on mobile data** — MSISDN detected via HE, saved to browser cookie
+- **Subsequent visits on WiFi** — MSISDN detected via saved cookie (if configured)
+- **New/incognito browser** — Cannot detect on WiFi (no saved cookie)
+
+### Debug Tips
+
+1. Use the PT Tool at `https://he-consent-ptapp.pages.dev` to test the full flow interactively
+2. Check your browser's Network tab — all redirects should be 302 with `Cache-Control: no-store`
+3. If the authorize redirect shows `Location: http://msisdndetect...`, that's correct (HTTP is needed for enrichment)
+4. The `unique_ref` format is always `HE-{8chars}-{5digits}` (e.g. `HE-a1b2c3d4-12345`)
+
+---
+
 ## Support
 
-For onboarding, configuration, or troubleshooting, contact the IdeaBiz team at idea.biz@dialog.lk.
+For onboarding, configuration, or troubleshooting, contact the IdeaBiz team.
