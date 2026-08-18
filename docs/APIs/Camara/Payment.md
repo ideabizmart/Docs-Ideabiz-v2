@@ -185,6 +185,13 @@ Response
 
 ```json
 {
+  "code": "CARRIER_BILLING.PAYMENT_DENIED",
+  "status": 403,
+  "message": "Payment denied due to insufficient balance."
+}
+```
+```json
+{
   "code": "INVALID_ARGUMENT",
   "status": 400,
   "message": "Schema validation failed at  ..."
@@ -249,6 +256,7 @@ Response
 |                         400 | INVALID_ARGUMENT                    | Invalid account details. Please verify the subscriber/account and try again.        |
 |                         400 | INVALID_ARGUMENT                    | Invalid reason code provided for this transaction.         |
 |                         403 | CARRIER_BILLING.PAYMENT_DENIED      | CARRIER_BILLING.PAYMENT_DENIED           |
+|                         403 | CARRIER_BILLING.PAYMENT_DENIED      | Payment denied due to insufficient balance           |
 |                         403 | CARRIER_BILLING.PAYMENT_DENIED      | Transaction not allowed: outgoing is barred for this account          |
 |                         403 | CARRIER_BILLING.PAYMENT_DENIED      | Not authorized to perform this transaction.          |
 |                         403 | CARRIER_BILLING.UNAUTHORIZED_AMOUNT | Unauthorized amount requested            |
