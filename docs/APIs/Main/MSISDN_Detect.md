@@ -1,4 +1,4 @@
-# Consent Auth API — Integration Documentation
+# MSISDN Detect API — Integration Documentation
 
 ## Overview
 
@@ -20,7 +20,7 @@ The MSISDN Detection API enables vendors to identify mobile subscribers via Head
 
 ```
 1. Get your client_id from IdeaBiz team
-2. Subscribe to "Consent Auth" API on IdeaBiz Store
+2. Subscribe to "MSISDN Detect" API on IdeaBiz Store
 3. Redirect user browser → consent.ideamart.io/web/v1/authorize?client_id=X&ref=Y
 4. Receive callback with status and unique_ref
 5. Call ideabiz.lk API with unique_ref → get MSISDN
@@ -28,7 +28,7 @@ The MSISDN Detection API enables vendors to identify mobile subscribers via Head
 
 ---
 
-## Step 1: Web Redirect (consent.ideamart.io)
+## Step 1: Web Redirect (.ideamart.io)
 
 Redirect the user's browser to start MSISDN detection. No server-side auth needed — your app is identified by `client_id`.
 
@@ -134,11 +134,11 @@ Response:
 
 ### API Option A: IdeaBiz Format
 
-**API Name:** Consent Auth  
+**API Name:** MSISDN Detect  
 **Version:** v1
 
 ```
-GET https://ideabiz.lk/apicall/consent/v1/status?ref={unique_ref}
+GET https://ideabiz.lk/apicall/msisdndetect/v1/status?ref={unique_ref}
 Authorization: Bearer {access_token}
 ```
 
@@ -186,7 +186,7 @@ Authorization: Bearer {access_token}
 Use this to find our `unique_ref` using your own campaign reference — useful for transactions that terminated mid-flow (user dropped off before callback).
 
 ```
-GET https://ideabiz.lk/apicall/consent/v1/lookup?ref={your_campaign_ref}
+GET https://ideabiz.lk/apicall/msisdndetect/v1/lookup?ref={your_campaign_ref}
 Authorization: Bearer {access_token}
 ```
 
@@ -226,11 +226,11 @@ Authorization: Bearer {access_token}
 
 ### API Option B: TMF681 Format
 
-**API Name:** Consent Auth TMF  
+**API Name:** MSISDN Detect TMF  
 **Version:** v1
 
 ```
-GET https://ideabiz.lk/apicall/consent-tmf/v1/status?ref={unique_ref}
+GET https://ideabiz.lk/apicall/msisdndetect-tmf/v1/status?ref={unique_ref}
 Authorization: Bearer {access_token}
 ```
 
@@ -399,7 +399,7 @@ $uniqueRef = $_GET['unique_ref'];
 
 if ($status === 'DETECTED') {
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "https://ideabiz.lk/apicall/consent/v1/status?ref=" . urlencode($uniqueRef));
+    curl_setopt($ch, CURLOPT_URL, "https://ideabiz.lk/apicall/msisdndetect/v1/status?ref=" . urlencode($uniqueRef));
     curl_setopt($ch, CURLOPT_HTTPHEADER, ["Authorization: Bearer " . $accessToken]);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $response = json_decode(curl_exec($ch), true);
@@ -430,7 +430,7 @@ app.get('/callback', async (req, res) => {
 
   if (status === 'DETECTED') {
     const resp = await fetch(
-      `https://ideabiz.lk/apicall/consent/v1/status?ref=${unique_ref}`,
+      `https://ideabiz.lk/apicall/msisdndetect/v1/status?ref=${unique_ref}`,
       { headers: { 'Authorization': `Bearer ${accessToken}` } }
     );
     const data = await resp.json();
@@ -453,7 +453,7 @@ import requests
 # Step 2: Backend lookup
 def lookup_msisdn(unique_ref, access_token):
     resp = requests.get(
-        f"https://ideabiz.lk/apicall/consent/v1/status?ref={unique_ref}",
+        f"https://ideabiz.lk/apicall/msisdndetect/v1/status?ref={unique_ref}",
         headers={"Authorization": f"Bearer {access_token}"}
     )
     data = resp.json()
@@ -473,7 +473,7 @@ def lookup_msisdn(unique_ref, access_token):
 // Step 2: Backend lookup
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://ideabiz.lk/apicall/consent/v1/status?ref=" + uniqueRef))
+    .uri(URI.create("https://ideabiz.lk/apicall/msisdndetect/v1/status?ref=" + uniqueRef))
     .header("Authorization", "Bearer " + accessToken)
     .GET()
     .build();
@@ -556,14 +556,14 @@ If a user dropped off mid-flow (browser closed, network issue) and your callback
 ### IdeaBiz Format
 
 ```
-GET https://ideabiz.lk/apicall/consent/v1/lookup?ref={your_campaign_ref}
+GET https://ideabiz.lk/apicall/msisdndetect/v1/lookup?ref={your_campaign_ref}
 Authorization: Bearer {access_token}
 ```
 
 ### TMF681 Format
 
 ```
-GET https://ideabiz.lk/apicall/consent-tmf/v1/lookup?ref={your_campaign_ref}
+GET https://ideabiz.lk/apicall/msisdndetect-tmf/v1/lookup?ref={your_campaign_ref}
 Authorization: Bearer {access_token}
 ```
 
