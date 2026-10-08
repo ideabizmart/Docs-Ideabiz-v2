@@ -432,9 +432,11 @@ Message Id starts with <code>SV </code>
 HTTP Respose code <code> 400 </code>
 #### Fault Response Body
 <pre>
+```
 {
 Invalid input value for message part %1
 }
+```
 </pre>
 
 HTTP Respose code <code> 400 </code>
