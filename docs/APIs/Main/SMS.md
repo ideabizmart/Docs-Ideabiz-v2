@@ -269,6 +269,7 @@ Given below is a sample response of the send service.
 This allows you to retrieve any SMS that have been sent to the port assigned to your Web application. Once your port or port:keyword receives an SMS, it will be pushed to your application as a JSON request.
 
 <pre>
+```
 {
   "inboundSMSMessageNotification": {
     "callbackData": "callbackdata",
@@ -281,6 +282,7 @@ This allows you to retrieve any SMS that have been sent to the port assigned to 
     }
   }
 }
+```
 </pre>
  
  
@@ -289,6 +291,7 @@ This allows you to retrieve any SMS that have been sent to the port assigned to 
 When you send the [SMS API Call](#sending-sms), you can mention a callback/notify URL. Delivery notifications will be pushed to the mentioned URL once the SMS is delivered.
  
 <pre>
+```
 {
   "deliveryInfoNotification": {
     "callbackData": "some-data-useful-to-the-requester",
@@ -303,6 +306,7 @@ When you send the [SMS API Call](#sending-sms), you can mention a callback/notif
     }
   }
 }
+```
 </pre>
  
  <!--

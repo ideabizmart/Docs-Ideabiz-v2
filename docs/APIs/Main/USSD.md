@@ -23,9 +23,11 @@ All API call request to ideabiz.lk required Authorization headers. Please refer 
 
 ##### Request Header
 <pre>
+```
 Content-Type: application/json
 Authorization: Bearer [access token]
 Accept: application/json
+```
 </pre>
 
 ### Initiating Mobile Terminated USSD (NI USSD/MT)
