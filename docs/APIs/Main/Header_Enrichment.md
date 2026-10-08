@@ -25,7 +25,7 @@ sequenceDiagram
 
 > [!IMPORTANT]
 > **Key Operational Requirements:**
-> 1. **Dialog Mobile Data Only:** The visitor **must** browse using Dialog mobile cellular data (3G/4G/5G). It **will not work over Wi-Fi** or fixed broadband.
+> 1. **Dialog Mobile Data Only:** The visitor **must** browse using Dialog mobile cellular data (3G/4G/5G). It **will not work over Wi-Fi** or fixed broadband connections.
 > 2. **URL Whitelisting:** You must provide your website URL to the Ideabiz team beforehand so Header Enrichment can be provisioned for your domain/IP.
 
 ---
@@ -34,8 +34,8 @@ sequenceDiagram
 
 - **MSISDN**: The telecom term for a mobile telephone number.
 - **Encrypted MSISDN**: For user privacy and security regulations, Dialog does not expose the customer's raw, plain phone number. Instead, a temporary encrypted token is provided. This token is accepted by Ideabiz Payment and SMS APIs.
-- **HTTP Header**: Background metadata sent by the browser or network to your server with every web request (like the return address on a letter).
-- **Base64 & URL Encoding**: Standard ways to safely transmit special or binary characters across the internet without corruption.
+- **HTTP Header**: Background metadata sent by the browser or network to your server with every web request (like the return address on an envelope).
+- **Base64 & URL Encoding**: Standard methods to safely transmit special or binary characters across the internet without corruption.
 
 ---
 
@@ -93,7 +93,55 @@ etel%3A9477-vl%251D%25A3%25F7%25AC%25E1%25AE%25C0%25AD%25FF
 
 ---
 
-## 5. Dialog Mobile Network IP Ranges
+## 5. Code Implementation Examples
+
+### PHP Example
+```php
+<?php
+// 1. Read the incoming msisdn header injected by Dialog
+$rawHeader = $_SERVER['HTTP_MSISDN'] ?? null;
+
+if ($rawHeader) {
+    // 2. Base64 decode and URL encode with the 9477 prefix
+    $decoded = base64_decode($rawHeader);
+    $urlEncodedMsisdn = urlencode("9477-" . $decoded);
+
+    // Ready to be used in Ideabiz API requests:
+    // For Request Body: 'etel:+' . $urlEncodedMsisdn
+    // For Request URL:  urlencode('etel:' . $urlEncodedMsisdn)
+    echo "Ready for API: " . htmlspecialchars($urlEncodedMsisdn);
+} else {
+    echo "No MSISDN header found. Please ensure you are connected via Dialog Mobile Data.";
+}
+?>
+```
+
+### Java Example
+```java
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.codec.binary.Base64;
+
+// 1. Read the header from the incoming request
+String rawHeader = request.getHeader("msisdn");
+
+if (rawHeader != null) {
+    // 2. Base64 decode using ISO-8859-1 character set
+    byte[] decodedBytes = Base64.decodeBase64(rawHeader);
+    String decodedStr = new String(decodedBytes, StandardCharsets.ISO_8859_1);
+
+    // 3. Prefix and URL encode
+    String msisdnWithPrefix = "9477-" + decodedStr;
+    String urlEncodedValue = URLEncoder.encode(msisdnWithPrefix, "ISO-8859-1");
+
+    System.out.println("Ready for API: " + urlEncodedValue);
+}
+```
+
+---
+
+## 6. Dialog Mobile Network IP Ranges
 
 To ensure security and verify that incoming web requests are legitimately originating from Dialog's cellular network, you can check the visitor's IP address against Dialog's mobile IP blocks:
 
@@ -102,17 +150,42 @@ To ensure security and verify that incoming web requests are legitimately origin
 - `122.255.44.0/22`
 
 > [!TIP]
-> If a visitor's IP falls outside these ranges, they are likely browsing via a broadband Wi-Fi provider or an international connection, and Header Enrichment will not trigger.
+> If a visitor's IP falls outside these ranges, they are browsing via a broadband Wi-Fi provider or an international connection, and Header Enrichment will not trigger.
 
 ---
 
-## 6. How to Test Header Enrichment
+## 7. How to Test Header Enrichment
 
 Use this test script to verify your setup before integrating with full payment or SMS flows.
 
 ### Testing Checklist
 - [ ] Upload the script below as `test_he.php` to your whitelisted web server.
-- [ ] Take a smartphone equipped with a active **Dialog SIM card**.
+- [ ] Take a smartphone equipped with an active **Dialog SIM card**.
 - [ ] Turn **OFF Wi-Fi**.
 - [ ] Turn **ON Mobile Data**.
 - [ ] Open the mobile browser and visit `https://yourdomain.com/test_he.php`.
+
+### Verification Script (`test_he.php`)
+```php
+<?php
+$clientIp = getenv('REMOTE_ADDR');
+echo "<h3>Dialog Header Enrichment Test</h3>";
+echo "<strong>Client IP:</strong> " . htmlspecialchars($clientIp) . "<br><br>";
+
+if (empty($_SERVER['HTTP_MSISDN'])) {
+    echo "<p style='color: red;'><strong>Status:</strong> NO MSISDN HEADER RECEIVED.</p>";
+    echo "<p><strong>Troubleshooting:</strong></p>";
+    echo "<ul>";
+    echo "<li>Ensure Wi-Fi is turned OFF on your mobile device.</li>";
+    echo "<li>Ensure your phone is browsing using Dialog Mobile Data (4G/5G).</li>";
+    echo "<li>Verify that your website URL has been enabled for Header Enrichment by the Ideabiz team.</li>";
+    echo "</ul>";
+    exit;
+}
+
+$rawMsisdn = $_SERVER['HTTP_MSISDN'];
+echo "<p style='color: green;'><strong>Status:</strong> Header Detected Successfully!</p>";
+echo "<strong>Raw Base64 Header:</strong> " . htmlspecialchars($rawMsisdn) . "<br>";
+echo "<strong>URL Encoded:</strong> " . htmlspecialchars(urlencode($rawMsisdn)) . "<br>";
+?>
+```
