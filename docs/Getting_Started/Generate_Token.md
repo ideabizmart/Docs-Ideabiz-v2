@@ -12,10 +12,10 @@ For freshers and newcomers, API security can feel like a maze of different keys.
 
 ```mermaid
 graph TD
-    A["🔑 Consumer Key + Consumer Secret<br/>(Permanent Master Keys in Ideabiz Portal)"] --> B["🔒 Basic Authorization Header<br/>(Base64-encoded credential)"]
-    B --> C["🎫 Bearer Access Token<br/>(Temporary passport valid for 1 hour)"]
-    B --> D["🔄 Refresh Token<br/>(Used to get a new Access Token without logging in again)"]
-    C --> E["🚀 Ideabiz APIs<br/>(SMS, Payment, USSD, etc.)"]
+    A["Consumer Key + Consumer Secret<br/>(Permanent Master Keys in Ideabiz Portal)"] --> B["Basic Authorization Header<br/>(Base64-encoded credential)"]
+    B --> C["Bearer Access Token<br/>(Temporary passport valid for 1 hour)"]
+    B --> D["Refresh Token<br/>(Used to get a new Access Token without logging in again)"]
+    C --> E["Ideabiz APIs<br/>(SMS, Payment, USSD, etc.)"]
 ```
 
 | Credential | What is it? | How long does it last? | Where is it used? |
@@ -82,4 +82,4 @@ In Postman, you don't even need to encode it manually!
 
 Now that you have your credentials and understand the token hierarchy, proceed to the Token Management guide to learn how to request and renew tokens in your code or in Postman.
 
-👉 **[Go to Token Management Guide](./Token_Manegment.md)**
+**[Go to Token Management Guide](./Token_Manegment.md)**

@@ -11,10 +11,10 @@
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Customer as 📱 Mobile Customer
-    participant App as 🖥️ Your Application
-    participant Ideabiz as ☁️ Ideabiz Gateway
-    participant Billing as 💳 Dialog Billing Engine
+    actor Customer as Mobile Customer
+    participant App as Your Application
+    participant Ideabiz as Ideabiz Gateway
+    participant Billing as Dialog Billing Engine
 
     App->>Ideabiz: GET /balancecheck/v3/{MSISDN}... with Bearer Token
     Ideabiz->>Billing: Query subscriber wallet

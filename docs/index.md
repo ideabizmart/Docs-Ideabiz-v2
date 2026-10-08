@@ -4,7 +4,7 @@ Ideabiz is the digital enablement API platform by **Dialog Axiata PLC**. It allo
 
 ---
 
-## 🚀 Quick Start Guide for Newcomers
+## Quick Start Guide for Newcomers
 
 If you are new to Ideabiz or starting your first integration, follow these steps in order:
 
@@ -22,11 +22,11 @@ flowchart LR
 | **2** | [API Configuration](./Getting_Started/API_config.md) | Choose the APIs you need (SMS, Payment, USSD) and get them approved. |
 | **3** | [Generating API Keys](./Getting_Started/Generate_Token.md) | Locate your Consumer Key and Consumer Secret in the Ideabiz Portal. |
 | **4** | [Token Management](./Getting_Started/Token_Manegment.md) | Learn how to generate and refresh OAuth 2.0 Bearer tokens. |
-| **📖** | [**Telecom & API Glossary**](./Getting_Started/Glossary.md) | **Must-read for non-technical freshers:** Plain-English explanations of all telecom acronyms. |
+| **Reference** | [**Telecom & API Glossary**](./Getting_Started/Glossary.md) | **Must-read for non-technical freshers:** Plain-English explanations of all telecom acronyms. |
 
 ---
 
-## 📚 Core APIs Directory
+## Core APIs Directory
 
 Explore the most popular APIs available on the Ideabiz platform:
 
@@ -43,7 +43,7 @@ Explore the most popular APIs available on the Ideabiz platform:
 
 ---
 
-## 💬 Developer Support & Assistance
+## Developer Support & Assistance
 
 Need help or experiencing an issue?
 - **Support Guide:** [Contact Us](./Support/Contact%20Us.md)

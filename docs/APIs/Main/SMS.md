@@ -12,12 +12,12 @@
 sequenceDiagram
     autonumber
     box Your Infrastructure
-        participant App as 🖥️ Your Application
-        participant Webhook as 🌐 Your Delivery/Inbound Webhook
+        participant App as Your Application
+        participant Webhook as Your Delivery/Inbound Webhook
     end
     box Dialog & Ideabiz
-        participant Ideabiz as ☁️ Ideabiz SMS Gateway
-        actor Customer as 📱 Mobile Phone
+        participant Ideabiz as Ideabiz SMS Gateway
+        actor Customer as Mobile Phone
     end
 
     rect rgb(240, 248, 255)
@@ -46,8 +46,8 @@ sequenceDiagram
 > - **Standard English (GSM 7-bit):** Up to **160 characters** per SMS.
 > - **Unicode (Sinhala, Tamil, Special Symbols, Emojis):** Up to **70 characters** per SMS.
 > 
-> ⚠️ **The Emoji / Local Language Trap:**
-> If your message contains even **a single Sinhala character (e.g. `හෙලෝ`), Tamil character (e.g. `வணக்கம்`), or Emoji (e.g. `🎉`)**, the entire SMS switches to Unicode mode (70-char limit). A 150-character message that costs 1 SMS in English will suddenly be charged as **3 separate SMS messages** in Unicode!
+> **The Unicode / Local Language Pitfall:**
+> If your message contains even a single Sinhala character (e.g. `හෙලෝ`), Tamil character (e.g. `வணக்கம்`), or symbol/emoji, the entire SMS switches to Unicode mode (70-char limit). A 150-character message that costs 1 SMS in English will suddenly be charged as **3 separate SMS messages** in Unicode!
 
 ---
 

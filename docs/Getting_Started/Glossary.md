@@ -5,7 +5,7 @@
 
 ---
 
-## 📱 Mobile & Telecom Terms
+## Mobile & Telecom Terms
 
 | Term | Full Name | Plain English Explanation | Example |
 | :--- | :--- | :--- | :--- |
@@ -21,7 +21,7 @@
 
 ---
 
-## 🔒 Security & Authentication Terms
+## Security & Authentication Terms
 
 | Term | What is it? | Plain English Explanation |
 | :--- | :--- | :--- |
@@ -34,7 +34,7 @@
 
 ---
 
-## 🌐 Web & API Terms
+## Web & API Terms
 
 | Term | What is it? | Plain English Explanation |
 | :--- | :--- | :--- |
@@ -46,7 +46,7 @@
 
 ---
 
-## 💳 Payment & Wallet Terms
+## Payment & Wallet Terms
 
 | Term | Plain English Explanation |
 | :--- | :--- |

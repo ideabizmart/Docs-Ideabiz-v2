@@ -1,9 +1,9 @@
 ﻿
 This API allows to Charge a MSISDN on demand, upon verification of a PIN sent via SMS. The user will not be charged if the PIN is not verified .
 
-API flow is as below
-1.`Send Charge Request`  and capture the server reference `serverRef` 
-2.`Submit PIN` - use the PIN entered by user and the `serverRef` to get authorisation & charge status
+API flow is as below,<br>
+1.`Send Charge Request`  and capture the server reference `serverRef` <br>
+2.`Submit PIN` - use the PIN entered by user and the `serverRef` to get authorisation & charge status <br>
 3.`Status Check` - use the `serverRef` to check the status of any charge request 
 
 ## Requirements

@@ -2,8 +2,8 @@
 
 This api allows user to subscribe an MSISDN on demand, upon successful verification of a SMS PIN number . MSISDN will not be subscribed to the application if incorrect PIN is entered.
 
-API Flow is as below
-1.`Send Subscribe Request` and capture the server reference `serverRef`
+API Flow is as below, <br>
+1.`Send Subscribe Request` and capture the server reference `serverRef`<br>
 2.`Submit PIN` use the PIN entered by user and the `serverRef` to get subscription  status
 
 ## Requirements

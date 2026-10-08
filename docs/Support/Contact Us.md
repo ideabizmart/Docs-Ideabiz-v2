@@ -4,7 +4,7 @@ The Ideabiz Developer Support team is dedicated to assisting developers, partner
 
 ---
 
-## 📞 Support Channels & Hours
+## Support Channels & Hours
 
 - **Email:** [support@ideabiz.lk](mailto:support@ideabiz.lk)
 - **Direct Phone:** `+94 767 222 161`
@@ -12,7 +12,7 @@ The Ideabiz Developer Support team is dedicated to assisting developers, partner
 
 ---
 
-## ⚡ Quick Self-Check Before Raising a Ticket
+## Quick Self-Check Before Raising a Ticket
 
 Before contacting support, check if your issue is caused by one of these common setup issues:
 1. **Did your token expire?** Access tokens expire after 1 hour. Check if you received error code `900903` and need to [Refresh Your Token](../Getting_Started/Token_Manegment.md).
@@ -22,7 +22,7 @@ Before contacting support, check if your issue is caused by one of these common 
 
 ---
 
-## ✉️ Support Request Email Template
+## Support Request Email Template
 
 To help our technical team resolve your issue as fast as possible, please copy and fill out the template below when emailing `support@ideabiz.lk`:
 

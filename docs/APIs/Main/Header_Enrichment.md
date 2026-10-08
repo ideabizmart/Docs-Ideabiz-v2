@@ -11,10 +11,10 @@
 ```mermaid
 sequenceDiagram
     autonumber
-    actor User as 📱 Customer (Dialog Mobile Data)
-    participant Dialog as 📡 Dialog Cellular Network
-    participant Server as 🖥️ Your Web Server
-    participant Ideabiz as ☁️ Ideabiz APIs (Payment / SMS)
+    actor User as Customer (Dialog Mobile Data)
+    participant Dialog as Dialog Cellular Network
+    participant Server as Your Web Server
+    participant Ideabiz as Ideabiz APIs (Payment / SMS)
 
     User->>Dialog: Browses to your website
     Dialog->>Server: Forwards request & injects encrypted 'msisdn' header
