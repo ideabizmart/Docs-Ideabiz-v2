@@ -454,7 +454,7 @@ HTTP Respose code <code> 500 </code>
     "requestError": {
         "serviceException": {
             "messageId": "SVC7109",
-            "text": "URL param port and sender address in request body is not match. %1 - URL param port, %2 - sender address in request body ",
+            "text": "URL param port and sender address in request body is not match.<br> %1 - URL param port, %2 - sender address in request body ",
             "variables": "%1 - 87798, %2 - tel:87711"
         }
     }
