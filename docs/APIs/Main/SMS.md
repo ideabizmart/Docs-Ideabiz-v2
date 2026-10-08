@@ -436,6 +436,7 @@ Invalid input value for message part %1
 HTTP Respose code <code> 400 </code>
 #### Fault Response Body
 <pre>
+```
 {
     "requestError": {
         "serviceException": {
@@ -445,11 +446,13 @@ HTTP Respose code <code> 400 </code>
         }
     }
 }
+```
 </pre>
 
 HTTP Respose code <code> 500 </code>
 #### Fault Response Body
 <pre>
+```
 {
     "requestError": {
         "serviceException": {
@@ -459,11 +462,13 @@ HTTP Respose code <code> 500 </code>
         }
     }
 }
+```
 </pre>
 
 HTTP Respose code <code> 500 </code>
 #### Fault Response Body
 <pre>
+```
 {  
    "deliveryInfoNotification":{  
       "callbackData":"CB1525108371514-560212557",
@@ -475,11 +480,13 @@ HTTP Respose code <code> 500 </code>
       }
    }
 }
+```
 </pre>
 
 HTTP Respose code <code> 503 </code>
 #### Fault Response Body
 <pre>
+```
 {
     "fault": {
         "code": "900800",
@@ -487,6 +494,7 @@ HTTP Respose code <code> 503 </code>
         "description": "You have exceeded your quota"
     }
 }
+```
 </pre>
 
 ## Libraries and Samples
