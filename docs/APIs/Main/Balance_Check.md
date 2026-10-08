@@ -1,83 +1,106 @@
 # Balance Check API
 
-## Content
+> [!NOTE]
+> **What is the Balance Check API?**
+> The Balance Check API allows your application to check a Dialog customer's account balance and credit limit in real time. Businesses commonly use this before delivering a paid digital service to verify whether the customer has enough credit to be charged successfully.
 
-* [Overview](#overview)
-* [Method](#method)
-* [Requirements](#authorization-api-calls)
-* [Balance Checking](#balance-checking)
-* [Response Codes](#response-codes)
-* [Exceptions](#exceptions)
-* [Faults](#faults)
+---
 
-## Overview
-The Dialog Balance Check API allows you to obtain the account balance information of a user. Balance check services are accessible via RESTful web services.
+## 1. How It Works (Overview)
 
-### Method
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Customer as 📱 Mobile Customer
+    participant App as 🖥️ Your Application
+    participant Ideabiz as ☁️ Ideabiz Gateway
+    participant Billing as 💳 Dialog Billing Engine
 
-The following REST methods are available: 
-+  Obtaining the account balance information of a user.
-
-## Requirements<br>
-
-**Authorization API Calls**<br>
-All API call requests to ideabiz.lk require Authorization headers. Please refer the Token Management (http://docs.ideabiz.lk/Getting_Started/Token_Manegment) documentation for Authorization. 
-
-**Request Header**
-```
-Authorization: Bearer [access token] 
-Accept: application/json
-Content-Type: application/json
-```
- 
-**Sample Request Header**
-```
-Authorization: Bearer a92ba8hjgjhgjh3fa1609cabcd79
-Accept: application/json
-Content-Type: application/json
-```
-### Encrypted MSISDN
-Please refer Header Enrichment (http://docs.ideabiz.lk/APIs/Header_Enrichment) document for encrypted MSISDNs.
-
-## Balance Checking
-
-This allows you to send an SMS from your Web application to one or more addresses (MSISDNs).
-
-#### URL
-```
-https://ideabiz.lk/apicall/balancecheck/v3/{MSISDN}/transactions/amount/balance
-```
-```
-https://ideabiz.lk/apicall/balancecheck/v4/{MSISDN}/transactions/amount/balance
-```
-Please note that when you add an **Encrypted MSISDN**, you have to URL encode it again. 
-
-#### Sample URL *(With URL encoded Encrypted Number)*
-```
-https://ideabiz.lk/apicall/balancecheck/v3/etel:9476-vl%251D%25A3%25F7%25AC%25E1%25AE%25C0%25AD%25FF/transactions/amount/balance
+    App->>Ideabiz: GET /balancecheck/v3/{MSISDN}... with Bearer Token
+    Ideabiz->>Billing: Query subscriber wallet
+    Billing-->>Ideabiz: Returns account type & balance
+    Ideabiz-->>App: Returns JSON with status, balance, credit limit
+    alt Has Sufficient Balance
+        App->>Customer: Deliver service & proceed to charging
+    else Insufficient Balance
+        App->>Customer: Prompt user to top-up / recharge
+    end
 ```
 
-```
-https://ideabiz.lk/apicall/balancecheck/v4/etel:9476-vl%251D%25A3%25F7%25AC%25E1%25AE%25C0%25AD%25FF/transactions/amount/balance
-```
+---
 
-*(Refer the Header Enrichment (http://docs.ideabiz.lk/APIs/Header_Enrichment) document) *
+## 2. Key Concepts & Jargon Buster
 
-Before adding a **Plain Number** to the URL please omit "tel:+"
+- **Prepaid vs. Postpaid**:
+  - **PREPAID**: The customer pays in advance. The `balance` field indicates their current available airtime (in LKR).
+  - **POSTPAID**: The customer pays monthly. The `creditLimit` indicates their maximum credit ceiling, and `balance` indicates their remaining unbilled credit limit.
+- **Plain MSISDN**: Standard mobile number formatted with country code (e.g., `94766691500`).
+- **Encrypted MSISDN**: An anonymous alphanumeric token obtained through [Header Enrichment](./Header_Enrichment.md) when the user browses on mobile data.
 
-#### Sample URL *(With Plain Number)*
+---
 
-```
- https://ideabiz.lk/apicall/balancecheck/v3/94766691500/transactions/amount/balance
-```
+## 3. Prerequisites & Authorization
 
-##### Method
-```
+All API calls to Ideabiz require an OAuth 2.0 Bearer Access Token in the request headers.
+
+> [!TIP]
+> Need an Access Token? Follow the [Token Management Guide](../../Getting_Started/Token_Manegment.md) to generate or renew your token.
+
+### Required Request Headers
+
+| Header | Value | Description |
+| :--- | :--- | :--- |
+| `Authorization` | `Bearer [your_access_token]` | Active 1-hour access token |
+| `Accept` | `application/json` | Instructs the server to return JSON |
+| `Content-Type` | `application/json` | Standard media type |
+
+---
+
+## 4. Making a Balance Check Request
+
+### HTTP Method
+```http
 GET
 ```
 
-#### Response
+### Endpoint URL Template
+```http
+https://ideabiz.lk/apicall/balancecheck/v3/{MSISDN}/transactions/amount/balance
 ```
+
+> [!NOTE]
+> `/v3/` is the standard production endpoint. `/v4/` is also supported for backwards compatibility.
+
+---
+
+### Formatting the `{MSISDN}` Parameter
+
+The `{MSISDN}` in the URL must be formatted depending on whether you have a **Plain Number** or an **Encrypted Number**:
+
+#### Option A: Using a Plain Mobile Number
+- Use standard Sri Lankan international format: `947XXXXXXXX`.
+- **Do NOT** include `+`, `tel:`, dashes, or leading zeros.
+
+*Example URL:*
+```http
+https://ideabiz.lk/apicall/balancecheck/v3/94766691500/transactions/amount/balance
+```
+
+#### Option B: Using an Encrypted MSISDN (from Header Enrichment)
+- If you detected the user's number via [Header Enrichment](./Header_Enrichment.md), the token must be URL-encoded with the `etel:` prefix.
+
+*Example URL:*
+```http
+https://ideabiz.lk/apicall/balancecheck/v3/etel:9476-vl%251D%25A3%25F7%25AC%25E1%25AE%25C0%25AD%25FF/transactions/amount/balance
+```
+
+---
+
+## 5. API Response Reference
+
+### Successful Response (HTTP 200 OK)
+
+```json
 {
     "endUserId": "94766691500",
     "referenceCode": "DLG212005-1500564823863",
@@ -90,55 +113,58 @@ GET
 }
 ```
 
+### Response Field Descriptions
 
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `endUserId` | String | The MSISDN queried. |
+| `referenceCode` | String | Unique transaction tracking ID generated by Dialog's billing system. |
+| `accountInfo.accountType` | String | `PREPAID` or `POSTPAID`. |
+| `accountInfo.accountStatus` | String | Status of the SIM card (e.g., `Active`, `Suspended`). |
+| `accountInfo.creditLimit` | Number | Maximum credit limit allowed on the account (in LKR). |
+| `accountInfo.balance` | Number | Current available balance (in LKR) eligible for transactions. |
 
-<br>
-### Response Codes
- <br>
-200 – Success!<br>
-400 – Bad request; check the error message for details<br>
-401 – Authentication failure, check your authentication details<br>
-403 – Forbidden; please provide authentication credentials<br>
-404 – Not found: mistake in the host or path of the service URI<br>
-405 – Method not supported: for example you mistakenly used a HTTP GET instead of a POST<br>
-500 – The server encountered an unexpected condition. This could be wrong authentication details or limited user permission<br>
-503 – Server busy and service unavailable. Please retry the request.<br>
- 
+---
 
+## 6. Response Codes & Troubleshooting
 
-### Exceptions
+| HTTP Code | Meaning | What to do? |
+| :---: | :--- | :--- |
+| **200** | Success | Query was successful; inspect `accountInfo.balance`. |
+| **400** | Bad Request | The MSISDN format is invalid or malformed. Verify the number has no `+` sign. |
+| **401** | Unauthorized | Your Access Token has expired or is invalid. Refresh your token. |
+| **403** | Forbidden | Your Ideabiz application is not subscribed or approved for the Balance Check API. |
+| **404** | Not Found | The endpoint URL path is incorrect or the subscriber number was not found. |
+| **405** | Method Not Allowed | Ensure you are using HTTP `GET` (not `POST`). |
+| **500** | Internal Server Error | Temporary billing engine failure. Retry the request after a short delay. |
+| **503** | Service Unavailable / Quota Exceeded | Server is busy or your application has exceeded its API rate limit tier. |
 
-#### Types
+---
 
-##### Policy Exception
+## 7. Error & Exception Payloads
 
-Message Id start with<code>PL</code>
+### Policy & Server Exceptions
+When an error occurs at the business or platform layer, the response will contain an exception structure:
 
-##### Server Exception
+- **Policy Exception (`PLxxxx`)**: Violation of business rules (e.g., invalid subscriber account).
+- **Service Exception (`SVCxxxx`)**: Malformed parameters or input format errors.
 
-Message Id start with <code>SV</code>
-
- 
-
-#### Exception Body
-```
+```json
 {
     "requestError": {
         "serviceException": {
             "messageId": "SVC0002",
-            "text": " Invalid input value for message part %1",
-            "variables": " clientCorrelator Value 12345"
+            "text": "Invalid input value for message part %1",
+            "variables": "clientCorrelator Value 12345"
         }
     }
 }
 ```
 
-## Faults
+### Rate Limiting / Quota Fault (HTTP 503)
+If you exceed your approved API tier calls-per-second (TPS) or monthly quota:
 
-HTTP Response code <code>503</code>
- 
-#### Fault Response Body
-```
+```json
 {
     "fault": {
         "code": "900800",
@@ -147,4 +173,3 @@ HTTP Response code <code>503</code>
     }
 }
 ```
-

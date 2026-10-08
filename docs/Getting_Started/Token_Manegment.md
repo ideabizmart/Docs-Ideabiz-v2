@@ -1,273 +1,157 @@
-# Token Management
+# Token Management (OAuth 2.0)
 
-### 1. Create Token
+> [!NOTE]
+> **Why do we need Token Management?**
+> Every request you send to Ideabiz must be accompanied by an **Access Token**. For security reasons, each Access Token expires after **1 hour (3,600 seconds)**. 
+> 
+> Instead of requiring your username and password every hour, Ideabiz provides a **Refresh Token**. This guide explains how to generate your initial token and how to automatically refresh it when it expires.
 
-There are two methods of creating tokens. This is a one time process in normal scenarios.
+---
 
+## 1. The Token Lifecycle (How It Works)
 
-**A. Using an API call (via POSTMAN or your Application)**
-
-**B. Using the Store and Refresh token tool provided.** 
-
-
-
-### A. Via API call
-
-
-#### Via API call using your Application 
-
-Do this only if you don't already have a valid refresh token. This method will require you to provide your Ideabiz Username and password.
-
-But best practice is, to generate a token using refresh token. 
-
-
-* URL
-
-		https://ideabiz.lk/apicall/token
-
-* Headers
-
-      Content-Type: application/x-www-form-urlencoded
-      Authorization: Basic <Authorization code>
-
-##### Authorization Code
-
-The Authorization Code is the base64 encoded string of the following string.
-```
-    consumer key:consumer secret
+```mermaid
+stateDiagram-v2
+    [*] --> GenerateInitial: App launches / First time setup
+    GenerateInitial --> TokenActive: Receives Access Token + Refresh Token
+    
+    state TokenActive {
+        [*] --> MakingAPICalls: Use Bearer Access Token in API headers
+        MakingAPICalls --> TokenActive: Valid for 60 minutes
+    }
+    
+    TokenActive --> TokenExpired: 60 minutes pass (HTTP 401 Code 900903)
+    TokenExpired --> RefreshingToken: Call /token with Refresh Token
+    RefreshingToken --> TokenActive: Store new Access Token & new Refresh Token
 ```
 
-The consumer key and the consumer secret can be found on the **My Subscriptions** page once you log into ideabiz.lk 
+---
 
-* Sample Headers
-```
-    Content-Type: application/x-www-form-urlencoded
-    Authorization: Basic UWNzRmt6X1hdsfghe4b1RRZlBFRYUMmJTQUZVYTpWWXlkV0VIMzRfTHh2VEV3NUFvUTJsN0FobG9h
-```
+## 2. Token Overview Cheat Sheet
 
-* Method
+| Token Type | Lifespan | Purpose | Where to include? |
+| :--- | :--- | :--- | :--- |
+| **Basic Auth Code** | Permanent | Identifies your application using `ConsumerKey:ConsumerSecret` | In the `/token` endpoint header |
+| **Access Token** | **1 Hour** | Grants permission to call Ideabiz APIs (SMS, Payment, etc.) | In API headers as `Authorization: Bearer <token>` |
+| **Refresh Token** | Long-lived | Used to obtain a new Access Token without re-entering credentials | Sent to `/token` when the access token expires |
 
-	POST
+---
 
-* URL parameter and value
+## 3. Method 1: Creating Your Initial Token (API Call)
 
-      grant_type : password 
-      username : [User Name] 
-      password : [Password] 
-      scope : PRODUCTION 
+Use this method when setting up your application for the first time or when testing in Postman.
 
+### Request Details
 
-Eg:
+- **Endpoint URL:** `https://ideabiz.lk/apicall/token`
+- **HTTP Method:** `POST`
+- **Headers:**
+  ```http
+  Content-Type: application/x-www-form-urlencoded
+  Authorization: Basic [BASE64_CONSUMER_KEY_AND_SECRET]
+  ```
+  *(See [Generating Your API Keys](./Generate_Token.md) for how to generate the Basic Auth header).*
 
-    https://ideabiz.lk/apicall/token?grant_type=password&username=<USER>&password=<PASSWORD>&scope=PRODUCTION
+- **Request Body (URL-encoded Form Data):**
 
+| Parameter | Value | Description |
+| :--- | :--- | :--- |
+| `grant_type` | `password` | Specifies that you are logging in with user credentials |
+| `username` | `your_username` | Your Ideabiz account username |
+| `password` | `your_password` | Your Ideabiz account password |
+| `scope` | `PRODUCTION` | Environment scope |
 
+### Step-by-Step in Postman (No Code Required):
+1. Create a new request in Postman with method **POST** and URL `https://ideabiz.lk/apicall/token`.
+2. Go to the **Authorization** tab, select **Basic Auth**, and enter your **Consumer Key** and **Consumer Secret**.
+3. Go to the **Body** tab, select **x-www-form-urlencoded**, and add the 4 key-value pairs (`grant_type`, `username`, `password`, `scope`).
+4. Click **Send**.
 
-* Response
-```
+### Successful Response (HTTP 200 OK)
+```json
 {
-	"scope": "PRODUCTION",
-	"token_type": "bearer",
-	"expires_in": 3600,
-	"refresh_token": "",
-	"access_token": ""
+    "scope": "PRODUCTION",
+    "token_type": "bearer",
+    "expires_in": 3600,
+    "refresh_token": "79b32c4a92df4c5fa34...",
+    "access_token": "b489a243c9884e88ab1..."
 }
 ```
 
+> [!IMPORTANT]
+> Save **both** the `access_token` and the `refresh_token` in your application or environment variables.
 
-__________
+---
 
+## 4. Method 2: Creating Tokens via the Ideabiz Portal (Zero Code)
 
-#### Via API call using POSTMAN
+If you just need a temporary token for quick manual testing:
+1. Log in to [Ideabiz Portal](https://www.ideabiz.lk).
+2. Go to **My Subscriptions**.
+3. Under the **Keys - Production** section, you can generate and copy an active **Access Token** and **Refresh Token** directly.
 
-In this method Sever Authentication is done by using REST Client such as [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)  
+---
 
-Postman can be used to check the connectivity of the sever and responses to the Requests(API calls) you are making.
+## 5. Renewing an Expired Token (The Refresh Flow)
 
-*Download [Postman](https://www.getpostman.com) 
-
-Input relevant data to fields in the following sample requests.
-
-* URL 
-
-      https://ideabiz.lk/apicall/token?grant_type=password&username=<USER>&password=<PASSWORD>&scope=PRODUCTION
-
-* USER -> Username
-* PASSWORD -> Login password
-
-
-* Headers
-
-      Content-Type: application/x-www-form-urlencoded
-      Authorization: Basic <Authorization code> 
-
-Refer [Authorization Code Generation](#authorization-code)
-
-* Method         
-
-		POST
-
-* After you send the request (empty body) you will receive a response as below
-* Below success response will confirm that connectivity to the server and sever side functions are working.
-```
-      {
-      "scope": "PRODUCTION",
-      "token_type": "bearer",
-      "expires_in": 3600,
-      "refresh_token": "",
-      "access_token": ""
-      }
-```
-       
-
-* Below error response will appear if there is a issue with username, password, consumer key or consumer secret.
-```
-      {
-        "error": "invalid_client",
-        "error_description": "Client Authentication failed."
-      }
-```
-______________
-
-
-
-
-
-
-
-
-
-
-
-### B. Via Ideabiz Store 
-
-1.You can create Access tokens via Ideabiz Store.
-
-Go to [My Subscriptions](https://www.ideabiz.lk/store/site/pages/subscriptions.jag)
-
-Once you have done that, you will receive the **Access Token** which will expire in 1 hour.
-
-
-
-2.Create Refresh token using the ideabiz tool.
-
-Click **Create Refresh Token** or Visit [Ideabiz Tools](https://ideabiz.lk/tools) 
-
-
-
-
-
-
-____________________
-_________________________
-
-
-
-
-
-
-
-
-
-
-### 2. Refreshing Tokens 
-
-Once the access token expires you will get an error response.
-
-Eg:
-
-       900903
-       Access Token Expired
-       Access Token has expired. Renew the access token.
-
-When this happens, you must make the following API call to refresh the access token. For this you will require the refresh token, since both the refresh token and the access token are coupled. The currently active refresh token that you received in step 1 ) is used to create a new access token.
-<br><br>
-##### **NOTE: Please note that the token should be refreshed ONLY when the existing token expires.**
-**This process of token renewing can be automated, please refer the below link for sample PHP source code.**<br>
-https://github.com/ideabizlk/IdeaBiz-Request-Handler---PHP
-
-This is a continuous process
-
-* URL
-
-		https://ideabiz.lk/apicall/token
-
-* Method
-
-		POST
-
-* URL parameter and value
-
-      grant_type : refresh_token
-      refresh_token : <Refresh token generated in Step 1>
-      scope : PRODUCTION
-
-Eg :
-
-      https://ideabiz.lk/apicall/token?grant_type=refresh_token&refresh_token=<Refresh 		Token>&scope=PRODUCTION
-
-* Headers
-
-      Content-Type: application/x-www-form-urlencoded
-      Authorization: Basic <Authorization code>
-
-Refer [Authorization Code Generation](#authorization-code)
-
-* Response
-```
-      {
-      "scope": "PRODUCTION",
-      "token_type": "bearer",
-      "expires_in": 3600,
-      "refresh_token": "",
-      "access_token": ""
-      }
-```
-
-
-
-
-### Responses
-
-#### Token expired
-
-
-HTTP Status 
-```
-401
-```
-
-```
-<?xml version="1.0" encoding="UTF-8"?>
+When your 1-hour Access Token expires, any API call you make will fail with an HTTP 401 error:
+```xml
 <ams:fault xmlns:ams="http://wso2.org/apimanager/security">
    <ams:code>900903</ams:code>
    <ams:message>Access Token Expired</ams:message>
-   <ams:description>Access failure for API: /payment, version: v2</ams:description>
+   <ams:description>Access failure for API: /smsmessaging, version: v3</ams:description>
 </ams:fault>
 ```
 
+When this happens, use your saved **Refresh Token** to obtain a fresh pair of tokens.
 
-#### Token Inactive
+### Refresh Request Details
 
+- **Endpoint URL:** `https://ideabiz.lk/apicall/token`
+- **HTTP Method:** `POST`
+- **Headers:**
+  ```http
+  Content-Type: application/x-www-form-urlencoded
+  Authorization: Basic [BASE64_CONSUMER_KEY_AND_SECRET]
+  ```
+- **Request Body:**
 
-HTTP Status 
+| Parameter | Value | Description |
+| :--- | :--- | :--- |
+| `grant_type` | `refresh_token` | Indicates you are renewing an existing session |
+| `refresh_token` | `[YOUR_REFRESH_TOKEN]` | The refresh token from your previous token response |
+| `scope` | `PRODUCTION` | Environment scope |
+
+### Response (New Tokens Issued)
+```json
+{
+    "scope": "PRODUCTION",
+    "token_type": "bearer",
+    "expires_in": 3600,
+    "refresh_token": "a189f332c...",
+    "access_token": "c782b198e..."
+}
 ```
-401
-```
 
-```
-<?xml version="1.0" encoding="UTF-8"?>
-<ams:fault xmlns:ams="http://wso2.org/apimanager/security">
-   <ams:code>900904</ams:code>
-   <ams:message>Access Token Inactive</ams:message>
-   <ams:description>Access failure for API: /balancecheck, version: v2</ams:description>
-</ams:fault>
-```
-_____________________
+> [!CAUTION]
+> **Important Rule for Developers:**
+> Whenever you call the refresh endpoint, Ideabiz returns a **brand-new Refresh Token** along with the new Access Token. You must overwrite your stored refresh token with the new one so your next renewal cycle succeeds!
 
+---
 
+## 6. Troubleshooting Common Token Errors
 
+| Error Code / Message | Probable Cause | How to Fix |
+| :--- | :--- | :--- |
+| **`900903`** <br> *Access Token Expired* | 1 hour has elapsed since the token was issued. | Trigger the refresh token API call (Method 5 above). |
+| **`900904`** <br> *Access Token Inactive* | The token was invalidated, revoked, or regenerated elsewhere. | Perform a fresh token login using your credentials (Method 3). |
+| **`invalid_client`** <br> *Client Authentication failed* | Incorrect Consumer Key or Consumer Secret in the `Basic` authorization header. | Double-check keys on the Ideabiz *My Subscriptions* page. |
+| **`invalid_grant`** | The refresh token provided is invalid or has already been used. | Generate a fresh token pair using username and password. |
 
+---
 
+## 7. Automation & SDKs
 
+Rather than refreshing tokens manually, your server should automatically catch HTTP `401 (900903)` responses and request a new token automatically.
 
+- **PHP Handler Sample:** [IdeaBiz-Request-Handler-PHP (GitHub)](https://github.com/ideabizlk/IdeaBiz-Request-Handler---PHP)
