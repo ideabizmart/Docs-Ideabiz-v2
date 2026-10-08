@@ -1,4 +1,4 @@
-
+﻿
 
 This api allows user to subscribe an MSISDN on demand, upon successful verification of a SMS PIN number . MSISDN will not be subscribed to the application if incorrect PIN is entered.
 
@@ -8,7 +8,7 @@ API Flow is as below
 
 ## Requirements
 
-**Authorization API calls** </br>
+**Authorization API calls** <br>
 All API call request to ideabiz.lk required Authorization headers. Please refer the *Token Management* (http://docs.ideabiz.lk/Getting_Started/Token_Manegment) document for Authorization.
 
 **Request Header**

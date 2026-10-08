@@ -1,4 +1,4 @@
-
+﻿# Payment API
 
 ## Content
 * [Overview](#overview)
@@ -24,7 +24,7 @@ The following REST method is available:
 ## Requirements
 
 
-**Authorization API calls** </br>
+**Authorization API calls** <br>
 All API call request to ideabiz.lk required Authorization headers. Please refer the *Token Management* (http://docs.ideabiz.lk/Getting_Started/Token_Manegment) document for Authorization.
 
 **Request Header**
@@ -47,7 +47,7 @@ Please refer the *Secure Header* (http://docs.ideabiz.lk/APIs/Header_Enrichment)
 ## Charging a subscriber
 
 This allows you to charge a subscriber for a service provided by your application. All charges are Taxable, and Standard Taxes will be charged from the subscriber  on top of the charging amount.
-</br></br>
+<br><br>
 *If you are a charity service or if different tax schemes are applicable for your service, please discuss with support team.
 
 
@@ -138,7 +138,7 @@ Given below are the Request parameters of the Payment service.
 			<p style="margin-left:6pt;">endUserId</p>
 			</td>
 			<td>
-			<p style="margin-left:6pt;">In this case the endUserId is the user's MSISDN including the 'tel:' protocol identifier and the country code preceded by '+'.</br>Eg: tel:+94766691500.</p>
+			<p style="margin-left:6pt;">In this case the endUserId is the user's MSISDN including the 'tel:' protocol identifier and the country code preceded by '+'.<br>Eg: tel:+94766691500.</p>
 			</td>
 			<td>
 			<p style="margin-left:6pt;">string</p>
@@ -253,8 +253,8 @@ Please use the balance check API for this purpose. (http://docs.ideabiz.lk/APIs/
 
 ## Retry Payment
 
-When the application needs to retry the same payment, send the same charging request with the same `cleintCorrelator`. The System will then return the last charging status.
-</br></br>
+When the application needs to retry the same payment, send the same charging request with the same `clientCorrelator`. The System will then return the last charging status.
+<br><br>
 Eg : When your application receives an error, you can send the same request. The status of the previous request will be returned.
 
 
@@ -374,7 +374,7 @@ Message Id start with <code>SV</code>
 
 ## Faults
 
-HTTP Respose code <code>503</code>
+HTTP Response code <code>503</code>
   
 #### Fault Response Body
 ```

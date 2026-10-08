@@ -1,4 +1,4 @@
-
+﻿
 This API allows to Charge a MSISDN on demand, upon verification of a PIN sent via SMS. The user will not be charged if the PIN is not verified .
 
 API flow is as below
@@ -9,7 +9,7 @@ API flow is as below
 ## Requirements
 
 
-**Authorization API calls** </br>
+**Authorization API calls** <br>
 All API call request to ideabiz.lk required Authorization headers. Please refer the *Token Management* (http://docs.ideabiz.lk/Getting_Started/Token_Manegment) document for Authorization.
 
 **Request Header**

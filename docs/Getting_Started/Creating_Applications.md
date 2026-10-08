@@ -1,5 +1,6 @@
+﻿# Creating Applications
 
-###### In order to create an application, first you should [Sign Up](https://www.ideabiz.lk/store/site/pages/sign-up.jag?) for an Ideabiz account.
+In order to create an application, first you should [Sign Up](https://www.ideabiz.lk/store/site/pages/sign-up.jag?) for an Ideabiz account.
 
 
 * Click on **My Application**
@@ -18,7 +19,7 @@
  * Now Your Application has been sent for Admin's Approval (This may take minimum 24h)
 
 
- * Your Approved Application and relevant transaction ** tiers ** can be viewed [here](https://www.ideabiz.lk/store/site/pages/applications.jag)
+ * Your Approved Application and relevant transaction **tiers** can be viewed [here](https://www.ideabiz.lk/store/site/pages/applications.jag)
 
 
 

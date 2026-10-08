@@ -1,4 +1,4 @@
-## Content
+﻿## Content
 * [Overview](#overview)
 * [Method](#method)
 * [Requirements](#requirements)
@@ -9,8 +9,8 @@
 ## Overview
 The Subscription Manager API allows applications to create their own subscriptions. However prior to being allowed access to the API, certain configurations need to be made. In order to make these configurations a callback URL is necessary in order to notify when the status of the subscription changes.
 
-## Requirements</br>
-**Subscription Manager Configurations**</br>
+## Requirements<br>
+**Subscription Manager Configurations**<br>
 The following parameters are required in order to create a subscription manager record:
 <br>
 <table border="1">
@@ -77,7 +77,7 @@ The following parameters are required in order to create a subscription manager 
 	</tbody>
 </table>
 
-**Authorization API Calls**</br>
+**Authorization API Calls**<br>
 All API call requests to ideabiz.lk require Authorization headers. Please refer the *Token Management* (http://docs.ideabiz.lk/Getting_Started/Token_Manegment) document for Authorization.
 
 **Request Header**
@@ -356,7 +356,7 @@ POST
 }
 ```
 
-### States of Parameters</br>
+### States of Parameters<br>
 States of the Request parameters of send service.
 <br>
 <table border="1">
@@ -438,7 +438,7 @@ States of the Request parameters of send service.
 			<p>senderName</p>
 			</td>
 			<td>
-			<p>Use this only if you want to show a number other than the senderAddress for the recipient to respond to, or if you want to show an Alphanumeric port (Mask) in the SMS recipients phone.</br></br>If this is kept blank, senderAddress will be used in its place.</br></br>A Mask (Maximum 11 Char) has to be approved & configured by the ideabiz Support team before it can be used.</br></br>Mask cannot contain special characters such as ~!@#$%^&*_=+-()`;:'"/?.,<></p>
+			<p>Use this only if you want to show a number other than the senderAddress for the recipient to respond to, or if you want to show an Alphanumeric port (Mask) in the SMS recipients phone.<br><br>If this is kept blank, senderAddress will be used in its place.<br><br>A Mask (Maximum 11 Char) has to be approved & configured by the ideabiz Support team before it can be used.<br><br>Mask cannot contain special characters such as ~!@#$%^&*_=+-()`;:'"/?.,<></p>
 			</td>
 			<td>
 			<p>string</p>
@@ -635,7 +635,7 @@ States of the Request parameters of send service.
 			<p>senderName</p>
 			</td>
 			<td>
-			<p>Use this only if you want to show a number other than the senderAddress for the recipient to respond to, or if you want to show an Alphanumeric port (Mask) in the SMS recipients phone.</br></br>If this is kept blank, senderAddress will be used in its place.</br></br>A Mask (Maximum 11 Char) has to be approved & configured by the ideabiz Support team before it can be used.</br></br>Mask cannot contain special characters such as ~!@#$%^&*_=+-()`;:'"/?.,<></p>
+			<p>Use this only if you want to show a number other than the senderAddress for the recipient to respond to, or if you want to show an Alphanumeric port (Mask) in the SMS recipients phone.<br><br>If this is kept blank, senderAddress will be used in its place.<br><br>A Mask (Maximum 11 Char) has to be approved & configured by the ideabiz Support team before it can be used.<br><br>Mask cannot contain special characters such as ~!@#$%^&*_=+-()`;:'"/?.,<></p>
 			</td>
 			<td>
 			<p>string</p>

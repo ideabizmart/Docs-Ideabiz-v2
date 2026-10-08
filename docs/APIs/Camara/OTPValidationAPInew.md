@@ -1,4 +1,4 @@
-
+﻿
 
 ## Content
 * [Overview](#overview)
@@ -37,7 +37,7 @@ Two endpoints are defined in One Time Password SMS API: <br>
 
 ## Requirements
 
-**Authorization API calls** </br>
+**Authorization API calls** <br>
 All API call request to ideabiz.lk required Authorization headers. Please refer the *Token Management* (http://docs.ideabiz.lk/Getting_Started/Token_Manegment) document for Authorization.
 
 **Request Header**

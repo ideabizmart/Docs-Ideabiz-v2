@@ -1,4 +1,4 @@
-
+﻿
 ### When exceeding throughput limit
 
 ```
@@ -82,17 +82,17 @@ For more information, Please refer: http://blingtechs.blogspot.com/2017/07/how-y
 			<p>ALL : SMS SUCCESS but different deliveryStatus</p>
 			</td>
 			<td>
-			<p>200:"DeliveredToNetwork"</br></br>200:"MessageWaiting"</br></br>200:"DeliveryImpossible"</br></br>200:"DeliveryUncertain</br></br>200:"UNSENT""</p>
+			<p>200:"DeliveredToNetwork"<br><br>200:"MessageWaiting"<br><br>200:"DeliveryImpossible"<br><br>200:"DeliveryUncertain<br><br>200:"UNSENT""</p>
 			</td>
 			<td>
-			<p>Successful delivery to the network enabler responsible for routing the SMS</br></br>The message is still queued for delivery. This is a temporary state, pending transition to one of the preceeding states</br></br>Unsuccessful delivery;the message could not be delivered before it expired</br></br>Delivery status unknown, eg: because it was handed off to another network</br></br>Errors from Plugin</p>
+			<p>Successful delivery to the network enabler responsible for routing the SMS<br><br>The message is still queued for delivery. This is a temporary state, pending transition to one of the preceeding states<br><br>Unsuccessful delivery;the message could not be delivered before it expired<br><br>Delivery status unknown, eg: because it was handed off to another network<br><br>Errors from Plugin</p>
 			</td>
 		</tr>
 	</tbody>
 </table>
-</br>
+<br>
 **Error Codes related to the Payment API** (http://docs.ideabiz.lk/APIs/Payment)
-</br>
+<br>
 <table border="1">
 	<thead>
 		<tr>
@@ -113,10 +113,10 @@ For more information, Please refer: http://blingtechs.blogspot.com/2017/07/how-y
 			<p>ALL: payment SUCCESS but different transactionOperationStatus</p>
 			</td>
 			<td>
-			<p>200:"Charged"</br></br>200:"Refunded"</br></br>200:"insufficient balance"</br></br>200:"System Error"</br></br>200:""</p>
+			<p>200:"Charged"<br><br>200:"Refunded"<br><br>200:"insufficient balance"<br><br>200:"System Error"<br><br>200:""</p>
 			</td>
 			<td>
-			<p>Success charged</br></br>Success Refund</br></br></br></br>Invalid MSISDN/Other Business error of OpCo</br></br>Timeout from OpCo</p>
+			<p>Success charged<br><br>Success Refund<br><br><br><br>Invalid MSISDN/Other Business error of OpCo<br><br>Timeout from OpCo</p>
 			</td>
 		</tr>	
 	</tbody>

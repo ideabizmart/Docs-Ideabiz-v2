@@ -1,4 +1,4 @@
-
+# SMS API
 
 ## Content
 
@@ -6,7 +6,7 @@
 * [Method](#method)
 * [Requirements](#requirements)
 * [Sending SMS](#sending-sms)
-* [Recieving SMS](#receiving-sms)
+* [Receiving SMS](#receiving-sms)
 * [Delivery Notifications](#delivery-notifications)
 * [Delivery Report](#delivery-report)
 * [Response Codes](#response-codes)
@@ -16,8 +16,8 @@
  
 
 ## Overview
-The Dialog SMS API allows an application to send and receive SMS messages. These services are accessible via RESTful web services.</br>Standard SMS messages (English, Alpha Numeric) are limited to 160 characters per message. If a message exceeds this limit, it is broken up into multiple segments of 160 characters each, and transmitted through the network,
-</br>If SMS is sent/received as a Unicode string(Special characters & non-English text), such SMS are limited to approx.70 characters, If a message exceeds this limit, it is broken up into multiple segments of 70 characters each, and transmitted through the network,</br>Note that the Operator or the API platform does not block any characters that exceed this length. It is advised to adhere to these limits within your application. (operator charges are applied per SMS transmitted and not per API call)
+The Dialog SMS API allows an application to send and receive SMS messages. These services are accessible via RESTful web services.<br>Standard SMS messages (English, Alpha Numeric) are limited to 160 characters per message. If a message exceeds this limit, it is broken up into multiple segments of 160 characters each, and transmitted through the network,
+<br>If SMS is sent/received as a Unicode string(Special characters & non-English text), such SMS are limited to approx.70 characters, If a message exceeds this limit, it is broken up into multiple segments of 70 characters each, and transmitted through the network,<br>Note that the Operator or the API platform does not block any characters that exceed this length. It is advised to adhere to these limits within your application. (operator charges are applied per SMS transmitted and not per API call)
 
 
 ### Method
@@ -28,9 +28,9 @@ The following REST methods are available:
  * Query the Delivery Status of an SMS
  * Retrieve SMS Sent to your Web Application (which is identified by the registrationId)
  
-## Requirements</br>
+## Requirements<br>
 
-**Authorization API Calls**</br>
+**Authorization API Calls**<br>
 All API call requests to ideabiz.lk require Authorization headers. Please refer the *Token Management* (http://docs.ideabiz.lk/Getting_Started/Token_Manegment) document for Authorization.
 
 **Request Header**
@@ -52,17 +52,17 @@ If sending a unicode string with the message, please set `Content-Type` charset 
 ```
 Content-Type: application/json;charset=UTF-8
 ```
-</br> Note: If sending Unicode string, such string is broken up into multiple segments of approx.70 characters each, and transmitted through the network as multiple SMS.
+<br> Note: If sending Unicode string, such string is broken up into multiple segments of approx.70 characters each, and transmitted through the network as multiple SMS.
 
-### Encrypted MSISDN</br> 
+### Encrypted MSISDN<br> 
 
-SMS API is compatible with Encrypted MSISDN</br>
+SMS API is compatible with Encrypted MSISDN<br>
 Please refer the *Secure Header* (http://docs.ideabiz.lk/APIs/Header_Enrichment) document for encrypted MSISDNs.
 
 
 ## Sending SMS
 
-This allows you to send an SMS from your Web application to one or more addresses (MSISDNs).</br> Even though several MSISDNs can be included in one API call, they will be transmitted through the network as separate SMS. 
+This allows you to send an SMS from your Web application to one or more addresses (MSISDNs).<br> Even though several MSISDNs can be included in one API call, they will be transmitted through the network as separate SMS. 
 
 #### **Request**
 
@@ -102,7 +102,7 @@ POST
     }
 }
 ```
-### States of Parameters</br>
+### States of Parameters<br>
 States of the Request parameters of send service.
 <br>
 <table border="1">
@@ -128,7 +128,7 @@ States of the Request parameters of send service.
 			<p>address</p>
 			</td>
 			<td>
-			<p>At least one address must be provided.</br></br>In this case it is the recipients MSISDN including the "tel:" protocol identifier and the country code preceded by "+".i.e., tel:+94766691500.</br></br>OneAPI also supports the Anonymous Customer Reference (ACR) if provided by the operator.
+			<p>At least one address must be provided.<br><br>In this case it is the recipients MSISDN including the "tel:" protocol identifier and the country code preceded by "+".i.e., tel:+94766691500.<br><br>OneAPI also supports the Anonymous Customer Reference (ACR) if provided by the operator.
 (However ACR is not supported in either versions of the SMSmessaging API)
 .</p>
 			</td>
@@ -144,7 +144,7 @@ States of the Request parameters of send service.
 			<p>senderAddress</p>
 			</td>
 			<td>
-			<p>This is the Port number configured for you, by the ideabiz Support team.</br></br>This is also the address to which, the SMS recipient may send a reply SMS. (Unless the senderAddress is hidden by the use of senderName.(See below))</p>
+			<p>This is the Port number configured for you, by the ideabiz Support team.<br><br>This is also the address to which, the SMS recipient may send a reply SMS. (Unless the senderAddress is hidden by the use of senderName.(See below))</p>
 			</td>
 			<td>
 			<p>string</p>
@@ -186,7 +186,7 @@ States of the Request parameters of send service.
 			<p>notifyURL</p>
 			</td>
 			<td>
-			<p>The URL to which you would like to receive a notification of delivery of SMS.</br></br>The format of this notification is shown below.</br>(See [Delivery Notifications](#delivery-notifications))</p>
+			<p>The URL to which you would like to receive a notification of delivery of SMS.<br><br>The format of this notification is shown below.<br>(See [Delivery Notifications](#delivery-notifications))</p>
 			</td>
 			<td>
 			<p>string</p>
@@ -200,7 +200,7 @@ States of the Request parameters of send service.
 			<p>callbackData</p>
 			</td>
 			<td>
-			<p>If Delivery Notifications were requested, this string will be passed back, so you can use it to identify the message, the receipt notification relates to (or any other useful data, such as a function name).</br></br>This is only valid if notifications were requested. (See the notifyURL above)</p>
+			<p>If Delivery Notifications were requested, this string will be passed back, so you can use it to identify the message, the receipt notification relates to (or any other useful data, such as a function name).<br><br>This is only valid if notifications were requested. (See the notifyURL above)</p>
 			</td>
 			<td>
 			<p>&nbsp;</p>
@@ -214,7 +214,7 @@ States of the Request parameters of send service.
 			<p>senderName</p>
 			</td>
 			<td>
-			<p>Use this only if you want to show a number other than the senderAddress for the recipient to respond to, or if you want to show an Alphanumeric port (Mask) in the SMS recipients phone.</br></br>If this is kept blank, senderAddress will be used in its place.</br></br>A Mask (Maximum 11 Char) has to be approved & configured by the ideabiz Support team before it can be used.</br></br>Mask cannot contain special characters such as ~!@#$%^&*_=+-()`;:'"/?.,<></p>
+			<p>Use this only if you want to show a number other than the senderAddress for the recipient to respond to, or if you want to show an Alphanumeric port (Mask) in the SMS recipients phone.<br><br>If this is kept blank, senderAddress will be used in its place.<br><br>A Mask (Maximum 11 Char) has to be approved & configured by the ideabiz Support team before it can be used.<br><br>Mask cannot contain special characters such as ~!@#$%^&*_=+-()`;:'"/?.,<></p>
 			</td>
 			<td>
 			<p>string</p>
@@ -228,7 +228,7 @@ States of the Request parameters of send service.
 
 <br>
 
-#### **Response**</br>
+#### **Response**<br>
 Given below is a sample response of the send service.
 
 #### Body
@@ -268,8 +268,7 @@ Given below is a sample response of the send service.
 
 This allows you to retrieve any SMS that have been sent to the port assigned to your Web application. Once your port or port:keyword receives an SMS, it will be pushed to your application as a JSON request.
 
-<pre>
-```
+```json
 {
   "inboundSMSMessageNotification": {
     "callbackData": "callbackdata",
@@ -283,15 +282,13 @@ This allows you to retrieve any SMS that have been sent to the port assigned to 
   }
 }
 ```
-</pre>
  
  
 ## Delivery Notifications
 
 When you send the [SMS API Call](#sending-sms), you can mention a callback/notify URL. Delivery notifications will be pushed to the mentioned URL once the SMS is delivered.
  
-<pre>
-```
+```json
 {
   "deliveryInfoNotification": {
     "callbackData": "some-data-useful-to-the-requester",
@@ -307,7 +304,6 @@ When you send the [SMS API Call](#sending-sms), you can mention a callback/notif
   }
 }
 ```
-</pre>
  
  <!--
 ### Subscribing for a keyword
@@ -429,20 +425,17 @@ Message Id starts with <code>SV </code>
 ``` 
 
 ## Faults
-HTTP Respose code <code> 400 </code>
+HTTP Response code <code> 400 </code>
 #### Fault Response Body
-<pre>
 ```
 {
 Invalid input value for message part %1
 }
 ```
-</pre>
 
-HTTP Respose code <code> 400 </code>
+HTTP Response code <code> 400 </code>
 #### Fault Response Body
-<pre>
-```
+```json
 {
     "requestError": {
         "serviceException": {
@@ -453,12 +446,10 @@ HTTP Respose code <code> 400 </code>
     }
 }
 ```
-</pre>
 
-HTTP Respose code <code> 500 </code>
+HTTP Response code <code> 500 </code>
 #### Fault Response Body
-<pre>
-```
+```json
 {
     "requestError": {
         "serviceException": {
@@ -469,12 +460,10 @@ HTTP Respose code <code> 500 </code>
     }
 }
 ```
-</pre>
 
-HTTP Respose code <code> 500 </code>
+HTTP Response code <code> 500 </code>
 #### Fault Response Body
-<pre>
-```
+```json
 {  
    "deliveryInfoNotification":{  
       "callbackData":"CB1525108371514-560212557",
@@ -487,12 +476,10 @@ HTTP Respose code <code> 500 </code>
    }
 }
 ```
-</pre>
 
-HTTP Respose code <code> 503 </code>
+HTTP Response code <code> 503 </code>
 #### Fault Response Body
-<pre>
-```
+```json
 {
     "fault": {
         "code": "900800",
@@ -501,7 +488,6 @@ HTTP Respose code <code> 503 </code>
     }
 }
 ```
-</pre>
 
 ## Libraries and Samples
 

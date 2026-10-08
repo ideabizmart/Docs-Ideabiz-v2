@@ -1,3 +1,5 @@
+# Token Management
+
 ### 1. Create Token
 
 There are two methods of creating tokens. This is a one time process in normal scenarios.
@@ -84,7 +86,7 @@ Postman can be used to check the connectivity of the sever and responses to the 
 
 *Download [Postman](https://www.getpostman.com) 
 
-Input relavent data to fields in the following sample requests.
+Input relevant data to fields in the following sample requests.
 
 * URL 
 
@@ -105,7 +107,7 @@ Refer [Authorization Code Generation](#authorization-code)
 
 		POST
 
-* After you send the request (empty body) you will recive a response as below
+* After you send the request (empty body) you will receive a response as below
 * Below success response will confirm that connectivity to the server and sever side functions are working.
 ```
       {
@@ -118,7 +120,7 @@ Refer [Authorization Code Generation](#authorization-code)
 ```
        
 
-* Below error respose will appear if there is a issue with username, password, consumer key or consumer secret.
+* Below error response will appear if there is a issue with username, password, consumer key or consumer secret.
 ```
       {
         "error": "invalid_client",
@@ -143,7 +145,7 @@ ______________
 
 Go to [My Subscriptions](https://www.ideabiz.lk/store/site/pages/subscriptions.jag)
 
-Once you have done that, you will recive the **Access Token** which will expire in 1 hour.
+Once you have done that, you will receive the **Access Token** which will expire in 1 hour.
 
 
 
@@ -179,7 +181,7 @@ Eg:
        Access Token has expired. Renew the access token.
 
 When this happens, you must make the following API call to refresh the access token. For this you will require the refresh token, since both the refresh token and the access token are coupled. The currently active refresh token that you received in step 1 ) is used to create a new access token.
-</br></br>
+<br><br>
 ##### **NOTE: Please note that the token should be refreshed ONLY when the existing token expires.**
 **This process of token renewing can be automated, please refer the below link for sample PHP source code.**<br>
 https://github.com/ideabizlk/IdeaBiz-Request-Handler---PHP

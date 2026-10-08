@@ -1,7 +1,4 @@
-/*
-Title: Roaming
-Sort: 8
-*/
+# Roaming
 
 ## Authorization
 
@@ -33,7 +30,7 @@ https://ideabiz.lk/apicall/roaminginfor/v0.1/<MCC>/<MNC>/<MSISDN>/<Home Location
 | Local Location ID | Currently available location | 
 | Destination Location ID | Destination to be dialed (Optional) |
 
-** Note **
+**Note**
 
 - If the `Destination Location ID` is set to `null`
   <br>The API will return   the Roaming rates for transactions from Local Location to Home Location.
@@ -43,7 +40,7 @@ https://ideabiz.lk/apicall/roaminginfor/v0.1/<MCC>/<MNC>/<MSISDN>/<Home Location
   <br>The API will return the domestic rates of the home location.
 
 
-** Response body **
+**Response body**
 
 ```
 {

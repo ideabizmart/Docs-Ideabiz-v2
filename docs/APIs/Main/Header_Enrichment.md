@@ -1,4 +1,4 @@
-
+# Header Enrichment
 
 Once you provide your URL to us, we will enable header enrichment for your IP based on your requirement.
 
@@ -9,7 +9,7 @@ when you're sending this MSISDN to us, please do as below
 
 
 
-You will recieve 'msisdn' header to your application (in base64 format)
+You will receive 'msisdn' header to your application (in base64 format)
 
 ```
 msisdn: dmwdovap66bFrvw=
@@ -91,7 +91,7 @@ String urlEncodedValue = URLEncoder.encode(msisdn, "ISO-8859-1");
 
 ## Testing Header Enrichment
 
-Please host bellow PHP file on your server and open it via HE enabled device
+Please host below PHP file on your server and open it via HE enabled device
 
 ```
 <?php

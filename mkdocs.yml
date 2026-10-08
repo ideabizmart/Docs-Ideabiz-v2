@@ -116,7 +116,6 @@ markdown_extensions:
   - pymdownx.tabbed:
       alternate_style: true
   - tables                  # Enables better table rendering
-  - pymdownx.superfences    # Fixes issues with code blocks
   - pymdownx.highlight      # Enables syntax highlighting
   - pymdownx.inlinehilite   # Enables inline code highlighting
   - pymdownx.extra     
@@ -134,4 +133,4 @@ extra:
     - icon: fontawesome/brands/linkedin
       link: https://linkedin.com/in/your-profile
     - icon: fontawesome/brands/youtube
-      link: https://linkedin.com/in/your-profile
+      link: https://youtube.com/your-channel

@@ -1,4 +1,4 @@
-
+﻿
 
 ## Content
 * [Overview](#overview)
@@ -24,7 +24,7 @@ The following REST method is available:
 ## Requirements
 
 
-**Authorization API calls** </br>
+**Authorization API calls** <br>
 Please note that All Ideabiz APIs require an access token to be passed on the API header along with 2 more headers. Refer below documentation to get an understanding on how to generate access tokens.
 [Documentation: ](https://docs.ideabiz.lk/Getting_Started/Token_Manegment)
 
@@ -48,7 +48,7 @@ Please refer the *Secure Header* [Documentation](https://docs.ideabiz.lk/APIs/Ma
 ## Charging a subscriber
 
 This allows you to charge a subscriber for a service provided by your application. All charges are Taxable, and Standard Taxes will be charged from the subscriber  on top of the charging amount.
-</br></br>
+<br><br>
 *If you are a charity service or if different tax schemes are applicable for your service, please discuss with support team.
 
 

@@ -1,4 +1,4 @@
-
+﻿
 
 ## Content
 * [Overview](#overview)
@@ -27,7 +27,7 @@ Client asks whether the device location is within a circle with center specified
 ## Requirements
 
 
-**Authorization API calls** </br>
+**Authorization API calls** <br>
 All API call request to ideabiz.lk required Authorization headers. Please refer the *Token Management* (http://docs.ideabiz.lk/Getting_Started/Token_Manegment) document for Authorization.
 
 **Request Header**

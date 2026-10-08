@@ -1,5 +1,5 @@
-## Admin API 
-This API will provide the facility to query subscribers of the application and to deactivate if necessary. Every service provider needs to implement an admin API as per below specification and communicate the end point to Dialog IdeaBiz team. This API will be connected with Admin interface for Dialog customer care frontline to query and to take necessary actions as per customer’s request.</br></br>
+﻿## Admin API 
+This API will provide the facility to query subscribers of the application and to deactivate if necessary. Every service provider needs to implement an admin API as per below specification and communicate the end point to Dialog IdeaBiz team. This API will be connected with Admin interface for Dialog customer care frontline to query and to take necessary actions as per customer’s request.<br><br>
 Through the Admin API URL, notifications can be received whenever subscribers’ statuses change. (eg: Status ‘SUBSCRIBED’ or Status ‘UNSUBSCRIBED’ and the method of subscription). Admin API notifications give you an overall view of all the status changes of subscribers, and functions as a method of cross-checking subscriber status in your application.  
 
 ```
@@ -88,10 +88,10 @@ POST
 |  status |  Current  status<br> UNSUBSCRIBED : User already unsubscribed<br>SUBSCRIBED : User has active subscription | Mandatory  |
 | registration  | User registration info | Mandatory  |
 | registration -> datetime  | User registration timestamp | Mandatory  |
-| registration -> method  | User registration method</br> values : SMS, WebWidget, USSD| Mandatory  |
-| unregistration  | User registration info</br>if there is no unregistration information, this should null  | Optional  |
+| registration -> method  | User registration method<br> values : SMS, WebWidget, USSD| Mandatory  |
+| unregistration  | User registration info<br>if there is no unregistration information, this should null  | Optional  |
 | unregistration -> datetime  | User registration timestamp | Mandatory  |
-| unregistration -> method  | User un-registration method</br> values : SMS, WEB, USSD, CC| Mandatory |
+| unregistration -> method  | User un-registration method<br> values : SMS, WEB, USSD, CC| Mandatory |
 | microSubscriptions 	| If the app has micro subscriptions | Optional |
 |serviceID 		| If you have multiple subscriptions under one app, this should return service ID  | Optional |
 
@@ -221,7 +221,7 @@ POST
 
 ## Subscribe / unsubscribe user from app or service
 
-Based on the user's state change, we will send a json to your notify URL.</br>
+Based on the user's state change, we will send a json to your notify URL.<br>
 You can cross check the status of the user as per your application records and update accordingly.
 
 

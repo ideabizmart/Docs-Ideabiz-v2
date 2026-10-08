@@ -1,3 +1,4 @@
+# Balance Check API
 
 ## Content
 
@@ -17,9 +18,9 @@ The Dialog Balance Check API allows you to obtain the account balance informatio
 The following REST methods are available: 
 +  Obtaining the account balance information of a user.
 
-## Requirements</br>
+## Requirements<br>
 
-**Authorization API Calls**</br>
+**Authorization API Calls**<br>
 All API call requests to ideabiz.lk require Authorization headers. Please refer the Token Management (http://docs.ideabiz.lk/Getting_Started/Token_Manegment) documentation for Authorization. 
 
 **Request Header**
@@ -134,7 +135,7 @@ Message Id start with <code>SV</code>
 
 ## Faults
 
-HTTP Respose code <code>503</code>
+HTTP Response code <code>503</code>
  
 #### Fault Response Body
 ```

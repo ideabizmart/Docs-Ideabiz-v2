@@ -1,11 +1,11 @@
-
+﻿
 ## Overview
 
 Initiate push notification based payment transaction request and returns initiated transaction details or relevant error details.
 
-## Requirements</br>
+## Requirements<br>
 
-**Authorization API Calls**</br>
+**Authorization API Calls**<br>
 All API call requests to ideabiz.lk require Authorization headers. Please refer the *Token Management* (http://docs.ideabiz.lk/Getting_Started/Token_Manegment) document for Authorization.
 
 **Request Header**

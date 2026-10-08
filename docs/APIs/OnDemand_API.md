@@ -1,4 +1,4 @@
-## Content
+﻿## Content
 * [Overview](#overview)
 * [Response](#response)
 * [Notification Request](#request)
@@ -171,7 +171,7 @@ A sample request is given below:
 If the service provider intends to send an USSD along with a SMS it is possible if the request above is sent. However if the request is not sent, a pre-defined message will be sent by the API.
 If the service provider decides to continue the USSD session, the response will be similar to that of the USSD API.(http://docs.ideabiz.lk/APIs/USSD)
 
-### States of Parameters</br>
+### States of Parameters<br>
 States of the Request parameters of send service.
 <br>
 <table border="1">
@@ -239,7 +239,7 @@ States of the Request parameters of send service.
 			<p>sms: callbackURL</p>
 			</td>
 			<td>
-			<p>The URL to which you would like to receive a notification of delivery of SMS.</br></br>The format of this notification is shown below.</p>
+			<p>The URL to which you would like to receive a notification of delivery of SMS.<br><br>The format of this notification is shown below.</p>
 			</td>
 			<td>
 			<p>string</p>
@@ -253,7 +253,7 @@ States of the Request parameters of send service.
     			<p>sms: port</p>
     			</td>
     			<td>
-    			<p>This is the Port number configured for the API.If a valid port is not sent, the OnDemand API will not dispatch the message to the recipient.</br></p>
+    			<p>This is the Port number configured for the API.If a valid port is not sent, the OnDemand API will not dispatch the message to the recipient.<br></p>
     			</td>
     			<td>
     			<p>string</p>

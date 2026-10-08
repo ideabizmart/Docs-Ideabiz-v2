@@ -1,4 +1,4 @@
-# KYC / Information Verification Platform API
+﻿# KYC / Information Verification Platform API
 
 ## Overview
 
@@ -8,7 +8,7 @@ The KYC / Information Verification Platform (IVP) API provides verification serv
 
 ## Requirements
 
-**Authorization API calls** </br>
+**Authorization API calls** <br>
 All API call request to ideabiz.lk required Authorization headers. Please refer the *Token Management* (http://docs.ideabiz.lk/Getting_Started/Token_Manegment) document for Authorization.
 
 **Request Header**

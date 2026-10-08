@@ -1,4 +1,4 @@
-/*
+﻿/*
 ProxyNumberMapping
 Sort: 8
 */
@@ -29,7 +29,7 @@ The following REST methods are available:
 ## Requirements
 
 
-**Authorization API calls** </br>
+**Authorization API calls** <br>
 All API call request to ideabiz.lk required Authorization headers. Please refer the *Token Management* (http://docs.ideabiz.lk/Getting_Started/Token_Manegment) document for Authorization.
 
 **Request Header**
@@ -51,7 +51,7 @@ Accept: application/json
 ## Subscribing New Users
 
 This allows you to add two new users for a service provided by your application. All charges are Taxable, and Standard Taxes will be charged from the subscriber  on top of the charging amount.
-</br></br>
+<br><br>
 
 
 #### **Request**
@@ -100,7 +100,7 @@ Status code  : 200
 ## Removing the added Users
 
 This allows you to remove the existing user pair.
-</br></br>
+<br><br>
 
 
 #### **Request**

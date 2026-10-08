@@ -22,13 +22,11 @@ The following REST methods are available <br>
 All API call request to ideabiz.lk required Authorization headers. Please refer (http://docs.ideabiz.lk/Getting_Started/Token_Manegment) for Authorization
 
 ##### Request Header
-<pre>
 ```
 Content-Type: application/json
 Authorization: Bearer [access token]
 Accept: application/json
 ```
-</pre>
 
 ### Initiating Mobile Terminated USSD (NI USSD/MT)
 

@@ -1,18 +1,15 @@
-/*
-Title: BillininfoAPI
-Sort: 
-*/
+# Billinfo API
 
-### Overview
-    Dialog BillInfoAPI provides end users to extract all the billing related details and the service can be accessed via a RESTful web service. 
+## Overview
+Dialog BillInfoAPI provides end users to extract all the billing related details and the service can be accessed via a RESTful web service. 
 
-### Method
-    The following REST methods are available:
-    Get All Billing information
+## Method
+The following REST methods are available:
+* Get All Billing information
 
 
-### Authorization API calls
-    All API call request to ideabiz.lk required Authorization headers. Please refer (http://docs.ideabiz.lk/Getting_Started/Token_Manegment) for Authorization
+## Authorization API calls
+All API call request to ideabiz.lk required Authorization headers. Please refer (http://docs.ideabiz.lk/Getting_Started/Token_Manegment) for Authorization
 
 
 ### Request Header

@@ -1,4 +1,4 @@
-/*
+﻿/*
 Title: Subscription API
 */
 
@@ -77,7 +77,7 @@ Accept: application/json
 | Parameter Name | Description | Type | Mandatory /Optional |
 | ------ | ------ | ------ | ------ |
 | method | This is the Subscription Type. This is how the event was triggered: Eg: Android app, Web Site. (Max: 15 Characters) | string | Mandatory |
-| msisdn | The user's number in the long format. Either Plain MSISDN or Encrypted MSISDN. </br> Eg:</br> PLAIN - tel:+94766691500 </br>ENCRYPTED -  etel:+9477-v%jkfdjkfh3#4 | string | Mandatory |
+| msisdn | The user's number in the long format. Either Plain MSISDN or Encrypted MSISDN. <br> Eg:<br> PLAIN - tel:+94766691500 <br>ENCRYPTED -  etel:+9477-v%jkfdjkfh3#4 | string | Mandatory |
 | serviceID | The serviceID is only required to be included in requests, when there are micro subscriptions available in the service. In all other cases, this parameter is optional.| string | Optional |
 
 ### Encrypted MSISDN

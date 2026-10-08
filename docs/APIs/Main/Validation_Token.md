@@ -1,4 +1,4 @@
-/*
+﻿/*
 Title: Widget Token Validation API
 Sort: 
 */
@@ -21,9 +21,9 @@ Widget Token Validation API allows you to generate validation token for your ser
 The following REST methods are available: 
 +  Obtaining validation token of a service.
 
-## Requirements</br>
+## Requirements<br>
 
-**Authorization API Calls**</br>
+**Authorization API Calls**<br>
 All API call requests to ideabiz.lk require Authorization headers. Please refer the Token Management (http://docs.ideabiz.lk/Getting_Started/Token_Manegment) documentation for Authorization. 
 
 **Request Header**

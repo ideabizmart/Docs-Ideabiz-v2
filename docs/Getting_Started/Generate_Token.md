@@ -1,4 +1,4 @@
-
+# Generate Token
 
 * Go to **My Subscription**
  * Select Your Application in the drop down list **Application with Subscription**
@@ -6,9 +6,9 @@
  	
         * Consumer Key & Consumer Secret - Using these credentials you can create the Access token which you need to pass for API calls to be authorized. 
 
-        * Access Token - This will be a Unique ID for your Application which will provide acsess to API's
+        * Access Token - This will be a Unique ID for your Application which will provide access to API's
 
-        * Refresh token - Token which can be used after current accses token expires,(in 1h by default) to get a new valid accses token.
+        * Refresh token - Token which can be used after current access token expires,(in 1h by default) to get a new valid access token.
 
 * Once you have received the **Access Token** which will expire in 1 hour. Inorder to get the new Access Token Click **Create Refresh Token** or Visit [Ideabiz Tools](https://ideabiz.lk/tools) 
 

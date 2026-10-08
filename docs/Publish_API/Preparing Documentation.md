@@ -1,9 +1,10 @@
+﻿# Preparing Documentation
 
 * Documentation should be markdown format
-* You can refer [here](https://guides.github.com/features/mastering-markdown/) for markdown documentaion in online
+* You can refer [here](https://guides.github.com/features/mastering-markdown/) for markdown documentation in online
 * You can use markdown [editors](http://dillinger.io/) for create your own markdown
  
-## Sections of the Documetation 
+## Sections of the Documentation 
 ###### API Description
 ###### API Flows
 ###### Authorization (same as other APIs) ( refer http://docs.ideabiz.lk/APIs/PIN-Verification)
