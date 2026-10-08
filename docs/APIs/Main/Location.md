@@ -28,9 +28,9 @@ The following REST methods are available.
 
 ### Request Header
 ```sh
-Content-Type: application/json<br>
-Authorization: Bearer [access token]<br>
-Accept: application/json<br>
+Content-Type: application/json
+Authorization: Bearer [access token]
+Accept: application/json
 ```
 
 ## Query the location of one mobile terminal
@@ -214,6 +214,22 @@ Following are the Response parameters of Location service.
 			<p style="margin-left:6pt;">NotRetrieved - Unable to retrieve the terminal location.</p>
 
 			<p style="margin-left:6pt;">Error - Error retrieving the terminal location.</p>
+			</td>
+			<td>
+			<p style="margin-left:6pt;">&nbsp;string</p>
+			</td>
+			<td>
+			<p style="margin-left:6pt;">&nbsp;</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p style="margin-left:6pt;">locationCheckWith"latitude&longitude"</p>
+			</td>
+			<td>
+			<p style="margin-left:6pt;">Use this format to check the location in Maps.</p>
+			<p style="margin-left:6pt;">latitude,longitude</p>
+			<p style="margin-left:6pt;">eg: 6.893967,79.857292</p>
 			</td>
 			<td>
 			<p style="margin-left:6pt;">&nbsp;string</p>

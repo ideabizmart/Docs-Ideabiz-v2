@@ -130,7 +130,7 @@ Given below are the Request parameters of the Payment service.
 			<p style="margin-left:6pt;">string</p>
 			</td>
 			<td>
-			<p style="margin-left:6pt;">Optional</p>
+			<p style="margin-left:6pt;">Mandatory</p>
 			</td>
 		</tr>
 		<tr>

@@ -178,7 +178,7 @@ States of the Request parameters of send service.
 			<p>string</p>
 			</td>
 			<td>
-			<p>Optional</p>
+			<p>Mandatory</p>
 			</td>
 		</tr>
 		<tr>
