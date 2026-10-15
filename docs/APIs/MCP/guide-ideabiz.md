@@ -1,6 +1,6 @@
 # Ideabiz MCP — User Guide
 
-Connect your AI coding assistant to Ideabiz APIs via MCP. Send SMS, check balances, charge subscribers, query locations, and manage PIN-based flows.
+Connect your AI coding assistant to Ideabiz APIs via MCP. Send SMS, check balances, charge subscribers, query locations, detect subscriber MSISDNs via header enrichment, and manage PIN-based flows.
 
 **MCP URL:** `https://mcp.ideamart.io/ideabiz/mcp`
 
@@ -29,7 +29,7 @@ Connect your AI coding assistant to Ideabiz APIs via MCP. Send SMS, check balanc
 
 ---
 
-## Available Tools (14)
+## Available Tools (18)
 
 | Tool | Purpose |
 |------|---------|
@@ -47,6 +47,10 @@ Connect your AI coding assistant to Ideabiz APIs via MCP. Send SMS, check balanc
 | `ideabiz_subscription_state_change` | Change subscription state |
 | `ideabiz_subscription_status_check` | Check subscription status |
 | `ideabiz_subscription_history_query` | Query subscription history |
+| `ideabiz_msisdn_authorize_url` | Build the MSISDN-detect web-redirect URL (HE step 1) |
+| `ideabiz_msisdn_status` | Retrieve detected MSISDN by `unique_ref` (HE step 2) |
+| `ideabiz_msisdn_lookup` | Recover MSISDN-detect transactions by your campaign ref |
+| `ideabiz_docs` | Get Ideabiz API documentation by topic |
 
 ---
 
@@ -196,6 +200,69 @@ AI calls:
    }
 ```
 
+### MSISDN Detection (Header Enrichment)
+
+Detect a subscriber's MSISDN automatically when they browse on mobile data — no PIN, no
+OTP. Two steps: (1) redirect the user's **browser** through the detect flow, (2) look up
+the detected number from your **backend**. Detection only works on mobile data
+(3G/4G/5G); WiFi users return `NOT_DETECTED`.
+
+```
+You: "Start MSISDN detection for client a1b2c3d4-... with campaign ref SIGNUP-42"
+
+Step 1 — build the redirect URL (no access token needed):
+
+AI calls:
+  ideabiz_msisdn_authorize_url → {
+    client_id: "a1b2c3d4-...",
+    ref: "SIGNUP-42",
+    custom_params: { region: "LK" }   // optional, up to 5; emitted as p_region=LK
+  }
+
+Response:
+  authorize_url: "https://consent.ideamart.io/web/v1/authorize?client_id=...&ref=SIGNUP-42&p_region=LK"
+  → Redirect the user's BROWSER to this URL.
+
+After detection the browser returns to your callback:
+  https://yoursite.com/callback?ref=SIGNUP-42&unique_ref=HE-xxxx&status=DETECTED
+
+Step 2 — retrieve the MSISDN from your backend (needs access_token):
+
+AI calls:
+1. ideabiz_token_renew → { client_key, client_secret }
+2. ideabiz_msisdn_status → {
+     access_token,
+     ref: "HE-xxxx",      // the unique_ref from the callback
+     format: "ideabiz"    // or "tmf" for TMF681 shape
+   }
+
+Response (detected):
+  detected: true
+  status_code: "S1000"
+  msisdn_token: "IB-A-000A-6a537144-..."
+  msisdn_mask: "9477*****67"
+  operator: "Dialog"
+  detection_method: "HE"
+```
+
+**Recover a dropped flow** — if the user closed the browser before the callback fired,
+find the transaction by your own campaign `ref`:
+
+```
+ideabiz_msisdn_lookup → { access_token, ref: "SIGNUP-42" }
+  → { count, transactions: [{ unique_ref, status, flow_step, created_at }, ...] }
+Then call ideabiz_msisdn_status with a returned unique_ref.
+```
+
+| Point | Detail |
+|-------|--------|
+| Step 1 auth | `client_id` only — NO access token (it's a browser redirect) |
+| Step 2 auth | OAuth2 `access_token` (Bearer), same as every other backend tool |
+| `format` | `ideabiz` (default) or `tmf` (TMF681 IndividualIdentification) |
+| `unique_ref` | One-time per detection, format `HE-{uuid}` |
+| Detection method | `HE` (header enrichment), `AAA` (IP resolver), `BROWSER` (cookie recall) |
+| Only on mobile data | WiFi / HTTPS-forced browsers return `NOT_DETECTED` |
+
 ---
 
 ## API Endpoints (Internal Reference)
@@ -212,6 +279,13 @@ AI calls:
 | PIN Payment Submit | POST | `/apicall/pin/payment/v1/submitPin` |
 | PIN Verify Initiate | POST | `/apicall/pin/verify/v1/verify` |
 | PIN Verify Submit | POST | `/apicall/pin/verify/v1/submitPin` |
+| MSISDN Detect — Authorize | GET | `https://consent.ideamart.io/web/v1/authorize?client_id={id}&ref={ref}` (browser) |
+| MSISDN Detect — Status | GET | `/apicall/msisdndetect/v1/status?ref={unique_ref}` (`-tmf` variant for TMF681) |
+| MSISDN Detect — Lookup | GET | `/apicall/msisdndetect/v1/lookup?ref={campaign_ref}` (`-tmf` variant for TMF681) |
+
+> The authorize step uses the **`consent.ideamart.io`** host (browser redirect), not the
+> `ideabiz.lk` API base. The status/lookup calls use the standard `ideabiz.lk` base with a
+> Bearer token.
 
 ---
 
@@ -241,11 +315,58 @@ Ideabiz accepts these formats:
 | Wrong Pin (500) | Incorrect PIN submitted | Ask user for correct PIN |
 | 404 Not Found | API not subscribed for your app | Subscribe to API in IdeaBiz portal |
 | Unauthorized (401) | MCP token invalid | Get new token at `/auth/login` |
+| MSISDN not detected (S1001) | User on WiFi / no header | Expected on WiFi — only mobile data (3G/4G/5G) is detectable |
+| MSISDN E4040 | `unique_ref` not found | Use the exact `unique_ref` from the callback; token must match the same app |
+
+### MSISDN Detect — `ideabiz_msisdn_status` statusCode
+
+| Code | Meaning |
+|------|---------|
+| S1000 | MSISDN detected |
+| S1001 | MSISDN not detected (WiFi, no header, HTTPS) |
+| E4001 | Missing `ref` |
+| E4010 / E4011 | Missing / invalid token |
+| E4030 | App not authorized for this ref |
+| E4040 | Transaction not found for ref |
+| E5002 | Number format conversion failed |
 
 ## Tips
 
 - The AI manages token renewal automatically when it expires
 - Provide `client_key`/`client_secret` once per session — AI remembers them
 - PIN flows are always 2-step: initiate → user gets PIN → submit PIN
+- MSISDN detection is also 2-step: `ideabiz_msisdn_authorize_url` (browser redirect, no token) → `ideabiz_msisdn_status` (backend, token)
+- `ideabiz_msisdn_authorize_url` makes no API call — it only builds the redirect URL
 - Use `include_raw_response: true` on any tool to debug API responses
+- Use `ideabiz_docs` with topic `msisdn` for the full header-enrichment reference
 - Balance check works for both prepaid and postpaid numbers
+
+---
+
+## Webhook Testing with Echo2
+
+Echo2 (https://echo.idmrt.dev/) captures inbound notifications/callbacks without running your own server. Useful for debugging PIN callbacks, delivery reports, and carrier billing notifications.
+
+### Capture SMS Delivery Reports:
+
+1. **Create Echo2 session** — Go to https://echo.idmrt.dev/ → Create Session → get unique callback URL
+2. **Use as notifyURL** — When sending SMS, include the Echo2 URL in `receiptRequest.notifyURL`
+3. **View** — When delivery status changes, Echo2 shows the DLR payload in real-time
+
+### Capture PIN Payment Callbacks:
+
+1. Set Echo2 URL as `callbackURL` in the PIN payment charge request
+2. After user confirms PIN, Echo2 captures the payment confirmation
+3. Inspect the payload to verify transaction outcome
+
+### Capture Carrier Billing Notifications:
+
+1. Use Echo2 URL as `notificationUrl` in carrier billing webhook field
+2. After charge processes, Echo2 captures the notification with transaction status
+
+### Echo2 Notes:
+- Region-restricted for session creation — use session code from colleague if blocked
+- Use for testing/debugging only — switch to your real server for production
+- Works for all Ideabiz notification types (DLR, PIN callbacks, billing notifications)
+- Each session has a unique URL — don't share publicly
+
