@@ -1,4 +1,4 @@
-# MSISDN Detect API — Integration Documentation
+# IdeaBiz MSISDN Detection API — Integration Documentation
 
 ## Overview
 
@@ -28,7 +28,7 @@ The MSISDN Detection API enables vendors to identify mobile subscribers via Head
 
 ---
 
-## Step 1: Web Redirect (.ideamart.io)
+## Step 1: Web Redirect (consent.ideamart.io)
 
 Redirect the user's browser to start MSISDN detection. No server-side auth needed — your app is identified by `client_id`.
 
@@ -40,9 +40,12 @@ For web apps that have a callback URL:
 
 ```
 GET https://consent.ideamart.io/web/v1/authorize?client_id={client_id}&ref={campaign_ref}
+    [&service_code={service_code}&service_name={service_name}&p_<key>=<value>]
 ```
 
-After detection, user is redirected to your configured callback URL with params.
+`service_code`, `service_name`, and `p_<key>` are optional (see the parameter table
+below). After detection, the user is redirected to your configured callback URL with
+params — including any `service_code` / `service_name` / `p_<key>` you sent.
 
 ### Option B: JSON Mode (no redirect URL)
 
@@ -79,14 +82,29 @@ GET https://consent.ideamart.io/web/v1/authorize?client_id={client_id}&ref={camp
 |-----------|----------|-------------|
 | `client_id` | Yes | Your UUID (provided during onboarding) |
 | `ref` | Yes | Your campaign/session reference. Returned unchanged in callback. |
+| `service_code` | No | Optional platform service code identifying the service on your side (e.g. a webwidget UUID or 32-char hex code). Max 64 chars. Stored on the transaction and echoed back on the callback, the JSON result (JSON-mode apps), and the server notification. |
+| `service_name` | No | Optional platform service name. Max 64 chars. Echoed back like `service_code`. |
+| `p_<key>` | No | Optional custom params (up to **5**). Any query param prefixed `p_` is captured as a custom key/value — e.g. `p_region=LK&p_tier=gold`. Each value is capped at 100 chars (longer values are truncated). Echoed back on the callback (`p_<key>`), the JSON result / server notification (`params`). |
 | `protocol` | No | Force detect protocol: `http` or `https`. Only works if enabled for your app. Default: auto. |
+| `security_vendor` | No | Anti-fraud vendor name, e.g. `evina`. Only if your app has security validation enabled. |
+| `security_ref` | Conditional | Reference issued by the security vendor. Required when your app is configured with `security_validation=REQUIRED`. Validated at the finish step. |
+
+> **Service identity + custom params** (`service_code`, `service_name`, `p_<key>`) are
+> all optional. When sent, they are persisted and echoed back on the browser callback,
+> the JSON result page (JSON-mode apps), and the server notification — so you can
+> correlate the result to your own service and request. (The TMF `/status` lookup
+> response does not carry them; use the callback or notification for echo-back.) On an
+> AAA lookup they
+> are also forwarded to the internal resolver (your values ride as
+> `remote_service_code` / `remote_service_name`), so the resolver record ties back to
+> your service too.
 
 ### What Happens
 
 The user's browser is automatically redirected through the detection chain (invisible to the user, takes < 1 second):
 
 ```
-consent.ideamart.io/web/v1/authorize → (WAF detection) → callback to your site
+consent.ideamart.io/web/v1/authorize → (WAF detection) → (security validation, if enabled) → callback to your site
 ```
 
 ### Callback to Your Site
@@ -97,13 +115,33 @@ After detection completes, the user is redirected to your configured callback UR
 https://yoursite.com/callback?ref={campaign_ref}&unique_ref={unique_ref}&status={status}
 ```
 
+If you sent `service_code` / `service_name` / `p_<key>` on authorize, they are appended
+to the callback too, e.g.:
+
+```
+https://yoursite.com/callback?ref={campaign_ref}&unique_ref={unique_ref}&status={status}&service_code={service_code}&service_name={service_name}&p_region=LK
+```
+
 | Parameter | Description |
 |-----------|-------------|
 | `ref` | Your original campaign reference (unchanged) |
-| `unique_ref` | Transaction reference for API lookup (e.g. `HE-1a3d1f87-36511`) |
+| `unique_ref` | Transaction reference for API lookup, `HE-{uuid}` (e.g. `HE-e1f6df42-a686-4dea-89f4-d32be009f3fb`) |
 | `status` | `DETECTED` or `NOT_DETECTED` |
+| `service_code` / `service_name` | Echoed back on the callback when you sent them on authorize. Omitted when not sent. |
+| `p_<key>` | Each custom param you sent is echoed back on the callback as `p_<key>=<value>`. |
+| `code` | Present when security validation is enabled: `S1000`/`S1001` (normal), `S1002` (vendor said invalid — blocked), `S1003` (vendor error, continued), `E1005` (vendor error, blocked). |
 
 > The redirect always happens regardless of detection outcome. Check the `status` parameter.
+
+### Security Validation (Optional)
+
+If your app is onboarded with an anti-fraud vendor (e.g. Evina), pass `security_vendor` and `security_ref` on the authorize URL. The service validates the reference with the vendor at the finish step:
+
+- Vendor says **invalid** → callback `status=NOT_DETECTED&code=S1002` (always blocked).
+- Vendor **errors** and your app is `CONTINUE` → real result with `code=S1003`.
+- Vendor **errors** and your app is `BLOCK` → `status=NOT_DETECTED&code=E1005`.
+
+The backend lookup API returns the same distinction via `statusCode` (`S1002`/`S1003`/`E1005`) plus `securityFlag: true`.
 
 ---
 
@@ -155,10 +193,35 @@ Authorization: Bearer {access_token}
     "platform": "IB",
     "format": "ATEL",
     "rvalue": "IB-A-000A-697-648-774-1704",
-    "operator": "Dialog"
+    "operator": "Dialog",
+    "detectionMethod": "AAA",
+    "sessionId": "d66328ee-2d45-4801-90bf-f2d30979c31d",
+    "identityRef": "e3b0c442-98fc-1c14-9afb-4c8996fb9242"
   }
 }
 ```
+
+**`detectionMethod`** reports how the MSISDN was detected:
+
+| Value | Meaning |
+|-------|---------|
+| `HE` | Header enrichment over the mobile network |
+| `AAA` | RADIUS IP→MSISDN resolver (mobile data) |
+| `AAA-C6` | RADIUS resolve via the consent6 IPv6 capture |
+| `BROWSER` | Cookie / localStorage identity recall |
+
+**`connectionType`** is reserved for the subscriber's billing class
+(`PREPAID` / `POSTPAID`) and currently returns `UNKNOWN` until that signal is
+available from the network.
+
+**`sessionId`** is the internal session id of this detection's transaction (the same
+`session_id` seen on the result/callback) — it identifies the transaction itself.
+
+**`identityRef`** is a separate per-transaction UUID that maps this transaction to its
+**browser identity**. Hand it to **ideamart-dot**; ideamart-dot sends it back to
+correlate the same browser/subscriber across requests. Distinct from `sessionId`: the
+session id names the txn, while `identityRef` is the identity-mapping ref. Present on a
+`DETECTED` response (a browser identity is attached on every detection).
 
 #### Success — NOT DETECTED
 
@@ -170,14 +233,28 @@ Authorization: Bearer {access_token}
 }
 ```
 
+#### Security Validation Status Codes (if enabled)
+
+Only relevant when your app is onboarded with an anti-fraud vendor. `securityFlag: true` marks any transaction where a security event occurred.
+
+| Code | HTTP | Meaning |
+|------|------|---------|
+| `S1002` | 200 | Vendor said **invalid** — treated as not-detected, always blocked. `{ "status": "SUCCESS", "statusCode": "S1002", "message": "security validation failed", "securityFlag": true }` |
+| `S1003` | 200 | Vendor **errored**, app set to `CONTINUE` — legit result returned with `securityFlag: true`. `msisdn` present if detected. |
+| `E1005` | 200 | Vendor **errored**, app set to `BLOCK` — not-detected. `{ "status": "FAILED", "statusCode": "E1005", "message": "security validation unavailable", "securityFlag": true }` |
+
 #### Errors
 
 | HTTP | Code | Description |
 |------|------|-------------|
 | 400 | E4001 | Missing `ref` query parameter |
-| 401 | E4010 | Missing or invalid Bearer token |
+| 401 | E4010 | Missing Bearer/JWT token |
+| 401 | E4011 | Invalid or expired token |
+| 403 | E4030 | Application not registered / not authorized for this ref |
 | 404 | E4040 | Transaction not found for given ref |
 | 500 | E5002 | Number format conversion failed |
+
+> All error bodies follow `{ "status": "FAILED", "statusCode": "<code>", "message": "..." }`.
 
 ---
 
@@ -289,10 +366,67 @@ Authorization: Bearer {access_token}
 
 | HTTP | Code | Description |
 |------|------|-------------|
-| 400 | ERR-0001 | Missing required parameter |
-| 401 | — | Unauthorized |
+| 400 | ERR-0001 | Missing required parameter (`ref`) |
+| 401 | E4010 | Missing Bearer/JWT token (auth layer, IdeaBiz-format body) |
+| 401 | E4011 | Invalid or expired token (auth layer, IdeaBiz-format body) |
+| 403 | E4030 | Application not registered (auth layer, IdeaBiz-format body) |
 | 404 | ERR-0004 | Resource not found |
 | 500 | ERR-0005 | Internal error |
+
+> Auth failures are enforced before the TMF handler runs, so their bodies use the IdeaBiz `statusCode` format (`E40xx`), not the TMF `code` format. Everything past auth uses TMF `ERR-000x` codes.
+
+---
+
+## Error Code Reference
+
+Consolidated list of every code a developer can encounter across the web flow and both backend API formats.
+
+### Web Redirect `status` (callback to your site)
+
+| `status` | Meaning |
+|----------|---------|
+| `DETECTED` | MSISDN detected |
+| `NOT_DETECTED` | MSISDN could not be detected (WiFi, no header, HTTPS, etc.) |
+| `INVALID_STATE` | Session accessed out-of-order or replayed (silent fraud handling) |
+
+### Backend API — IdeaBiz Format (`statusCode`)
+
+| Code | HTTP | Status | Meaning |
+|------|------|--------|---------|
+| `S1000` | 200 | SUCCESS | MSISDN detected |
+| `S1001` | 200 | SUCCESS | MSISDN not detected |
+| `E4001` | 400 | FAILED | Missing `ref` query parameter |
+| `E4010` | 401 | FAILED | Missing Bearer/JWT token |
+| `E4011` | 401 | FAILED | Invalid or expired token |
+| `E4030` | 403 | FAILED | Application not registered / not authorized for this ref |
+| `E4040` | 404 | FAILED | Transaction not found for given ref |
+| `E5002` | 500 | FAILED | Number format conversion / encryption failed |
+
+Body shape: `{ "status": "SUCCESS|FAILED", "statusCode": "<code>", "message": "..." }`.
+
+### Backend API — TMF681 Format (`code`)
+
+| Code | HTTP | Meaning |
+|------|------|---------|
+| `ERR-0001` | 400 | Missing required parameter (`ref`) |
+| `ERR-0004` | 404 | Resource not found |
+| `ERR-0005` | 500 | Internal error |
+
+> TMF auth failures return the IdeaBiz-format `E40xx` codes (auth runs before the TMF handler). TMF `code` values apply only past authentication.
+>
+> Error body shape: `{ "code": "ERR-000x", "reason": "...", "message": "...", "status": "<http>" }`.
+
+### Security Validation Codes (planned — not yet active)
+
+These codes are reserved for optional anti-fraud vendor (e.g. Evina) validation. **Not currently emitted** — documented so integrators can prepare. They appear only for apps onboarded with a security vendor once the feature ships.
+
+| Code | Format | Meaning |
+|------|--------|---------|
+| `S1002` | IdeaBiz / redirect `code` | Vendor said invalid — not-detected, always blocked, `securityFlag: true` |
+| `S1003` | IdeaBiz / redirect `code` | Vendor errored, app set to CONTINUE — legit result, `securityFlag: true` |
+| `E1005` | IdeaBiz / redirect `code` | Vendor errored, app set to BLOCK — not-detected, `securityFlag: true` |
+
+> The internal reference `docs/Error_Codes.md` holds the complete cross-endpoint matrix, including the AAA resolver and admin API codes.
 
 ---
 
@@ -520,7 +654,10 @@ Content-Type: application/json
   "campaign_ref": "your-campaign-ref-123",
   "status": "DETECTED",
   "session_id": "93620143-837e-42a3-9e0d-104bad6a3114",
-  "timestamp": "2026-06-09T12:30:45Z"
+  "timestamp": "2026-06-09T12:30:45Z",
+  "service_code": "551e955ef4a7d762327569556a202cda",
+  "service_name": "ShemarooMe",
+  "params": { "region": "LK", "tier": "gold" }
 }
 ```
 
@@ -531,6 +668,8 @@ Content-Type: application/json
 | `status` | `DETECTED` or `NOT_DETECTED` |
 | `session_id` | Internal session ID |
 | `timestamp` | UTC timestamp of redirect |
+| `service_code` / `service_name` | Echoed when you sent them on authorize. Omitted otherwise. |
+| `params` | Your custom `p_<key>` params as a `{ key: value }` object. Omitted when none were sent. |
 
 ### Behavior
 
@@ -594,8 +733,8 @@ Authorization: Bearer {access_token}
 ## Onboarding Checklist
 
 - [ ] Receive `client_id` (UUID) from IdeaBiz team
-- [ ] Subscribe to **Consent Auth** API on IdeaBiz Store
-- [ ] (Optional) Subscribe to **Consent Auth TMF** API for TMF681 format
+- [ ] Subscribe to **MSISDN Detect** API on IdeaBiz Store
+- [ ] (Optional) Subscribe to **MSISDN Detect TMF** API for TMF681 format
 - [ ] Provide your callback URL(s) to IdeaBiz team
 - [ ] Provide your referral domain(s)
 - [ ] (Optional) Provide your server notification URL for async callbacks
@@ -638,7 +777,7 @@ Your app may be configured with browser-based detection as a fallback. If so:
 1. Use the PT Tool at `https://he-consent-ptapp.pages.dev` to test the full flow interactively
 2. Check your browser's Network tab — all redirects should be 302 with `Cache-Control: no-store`
 3. If the authorize redirect shows `Location: http://msisdndetect...`, that's correct (HTTP is needed for enrichment)
-4. The `unique_ref` format is always `HE-{8chars}-{5digits}` (e.g. `HE-a1b2c3d4-12345`)
+4. The `unique_ref` format is `HE-{uuid}` (e.g. `HE-e1f6df42-a686-4dea-89f4-d32be009f3fb`)
 
 ---
 
