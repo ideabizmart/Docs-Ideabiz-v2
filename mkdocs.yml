@@ -21,7 +21,6 @@ nav:
             - "Location API": APIs/Main/Location.md
             - "Digital Rewards API": APIs/Main/RewardsToken_API.md
             - "MSISDN Detect": APIs/Main/MSISDN_Detect.md
-            - "MSISDN Resolver": APIs/Main/MSISDN_Resolver.md
             - "KYC API": APIs/Main/KYC.md
       - "Other APIs":
             - "Bill Info": APIs/BillinfoAPI.md
