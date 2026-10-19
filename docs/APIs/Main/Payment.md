@@ -1,4 +1,4 @@
-﻿# Payment API
+# Payment API
 
 ## Content
 * [Overview](#overview)
@@ -103,118 +103,13 @@ POST
 Given below are the Request parameters of the Payment service.
  
 
-<table border>
-	<tbody>
-		<tr>
-			<td>
-			<p align="center"><strong>Parameter Name</strong></p>
-			</td>
-			<td>
-			<p align="center"><strong>Description</strong></p>
-			</td>
-			<td>
-			<p align="center"><strong>Type</strong></p>
-			</td>
-			<td>
-			<p align="center"><strong>Mandatory/Optional</strong></p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p style="margin-left:6pt;">clientCorrelator</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">This uniquely identifies the Charging request. If there is a communication failure during the charging request, using the same clientCorrelator, when retrying the request, the operator can avoid applying the same charge twice.</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">string</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p style="margin-left:6pt;">endUserId</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">In this case the endUserId is the user's MSISDN including the 'tel:' protocol identifier and the country code preceded by '+'.<br>Eg: tel:+94766691500.</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">string</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p style="margin-left:6pt;">chargingInformation</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">description -This is the text to include, to easily identify what the user has been charged for. This description should be limited to 190 characters.</p>
-
-			<p style="margin-left:6pt;">currency - This is the 3 figure code as per ISO 4217.</p>
-
-			<p style="margin-left:6pt;">amount - This is the actual amount being charged. It can be a whole number or a decimal.</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">string</p>
-
-			<p style="margin-left:6pt;">string</p>
-
-			<p style="margin-left:6pt;">decimal</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p style="margin-left:6pt;">referenceCode</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">You can append a reference code for each transaction, to identify or cross check the transactions initiated by your application.</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">string</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Optional</p>
-			</td>
-		</tr>
-
-		<tr>
-			<td>
-			<p style="margin-left:6pt;">chargingMetaData type</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">onBehalfOf - Allows aggregators/partners to specify the actual payee.</p>
-
-			<p style="margin-left:6pt;">purchaseCategoryCode - A category defining the type of service, product or media being purchased.(Optional - if you don't have a Category code, please keep this empty or remove this property)</p>
-
-			<p style="margin-left:6pt;">channel - Indicates the source of user interaction.(Optional - to identify in case several channels are available e.g. Web/ Mobile App/ SMS) </p>
-
-			<p style="margin-left:6pt;">taxAmount - Specify as '0' as Tax is already preconfigured in the platform</p>
-
-
-			<p style="margin-left:6pt;">serviceID - Charging reason code. This will override the default application reason code. (Optional - if you don't have a separate Reason code that prints your service name in the end users bill remove this property)</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">string</p>
-
-			<p style="margin-left:6pt;">string</p>
-<br>
-			<p style="margin-left:6pt;">string</p>
-
-			<p style="margin-left:6pt;">decimal</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Optional</p>
-			</td>
-		</tr>
-	</tbody>
-</table>
+| **Parameter Name** | **Description** | **Type** | **Mandatory/Optional** |
+| --- | --- | --- | --- |
+| clientCorrelator | This uniquely identifies the Charging request. If there is a communication failure during the charging request, using the same clientCorrelator, when retrying the request, the operator can avoid applying the same charge twice. | string | Mandatory |
+| endUserId | In this case the endUserId is the user's MSISDN including the 'tel:' protocol identifier and the country code preceded by '+'. Eg: tel:+94766691500. | string | Mandatory |
+| chargingInformation | description -This is the text to include, to easily identify what the user has been charged for. This description should be limited to 190 characters. currency - This is the 3 figure code as per ISO 4217. amount - This is the actual amount being charged. It can be a whole number or a decimal. | string string decimal | Mandatory |
+| referenceCode | You can append a reference code for each transaction, to identify or cross check the transactions initiated by your application. | string | Optional |
+| chargingMetaData type | onBehalfOf - Allows aggregators/partners to specify the actual payee. purchaseCategoryCode - A category defining the type of service, product or media being purchased.(Optional - if you don't have a Category code, please keep this empty or remove this property) channel - Indicates the source of user interaction.(Optional - to identify in case several channels are available e.g. Web/ Mobile App/ SMS) taxAmount - Specify as '0' as Tax is already preconfigured in the platform serviceID - Charging reason code. This will override the default application reason code. (Optional - if you don't have a separate Reason code that prints your service name in the end users bill remove this property) | string string string decimal | Optional |
 
 ### Response
 ```

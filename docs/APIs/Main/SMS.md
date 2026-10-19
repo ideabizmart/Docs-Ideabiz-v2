@@ -105,126 +105,15 @@ POST
 ### States of Parameters<br>
 States of the Request parameters of send service.
 <br>
-<table border="1">
-	<thead>
-		<tr>
-			<th>
-			<p><strong>Parameter Name</strong></p>
-			</th>
-			<th>
-			<p><strong>Description</strong></p>
-			</th>
-			<th>
-			<p><strong>Type</strong></p>
-			</th>
-			<th>
-			<p><strong>Mandatory /Optional</strong></p>
-			</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>
-			<p>address</p>
-			</td>
-			<td>
-			<p>At least one address must be provided.<br><br>In this case it is the recipients MSISDN including the "tel:" protocol identifier and the country code preceded by "+".i.e., tel:+94766691500.<br><br>OneAPI also supports the Anonymous Customer Reference (ACR) if provided by the operator.
-(However ACR is not supported in either versions of the SMSmessaging API)
-.</p>
-			</td>
-			<td>
-			<p>string</p>
-			</td>
-			<td>
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p>senderAddress</p>
-			</td>
-			<td>
-			<p>This is the Port number configured for you, by the ideabiz Support team.<br><br>This is also the address to which, the SMS recipient may send a reply SMS. (Unless the senderAddress is hidden by the use of senderName.(See below))</p>
-			</td>
-			<td>
-			<p>string</p>
-			</td>
-			<td>
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p>message</p>
-			</td>
-			<td>
-			<p>Must be provided within the outboundSMSTextMessage element. Messages over 160 characters may end up being sent as two or more messages by the operator.</p>
-			</td>
-			<td>
-			<p>string</p>
-			</td>
-			<td>
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p>clientCorrelator</p>
-			</td>
-			<td>
-			<p>Uniquely identifies this SMS request. If there is a communication failure during the request, using the same clientCorrelator, when retrying, the request allows the operator to avoid sending the same SMS twice.</p>
-			</td>
-			<td>
-			<p>string</p>
-			</td>
-			<td>
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p>notifyURL</p>
-			</td>
-			<td>
-			<p>The URL to which you would like to receive a notification of delivery of SMS.<br><br>The format of this notification is shown below.<br>(See [Delivery Notifications](#delivery-notifications))</p>
-			</td>
-			<td>
-			<p>string</p>
-			</td>
-			<td>
-			<p>Optional.Keep empty or null if you don't want delivery notifications.</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p>callbackData</p>
-			</td>
-			<td>
-			<p>If Delivery Notifications were requested, this string will be passed back, so you can use it to identify the message, the receipt notification relates to (or any other useful data, such as a function name).<br><br>This is only valid if notifications were requested. (See the notifyURL above)</p>
-			</td>
-			<td>
-			<p>&nbsp;</p>
-			</td>
-			<td>
-			<p>Optional</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p>senderName</p>
-			</td>
-			<td>
-			<p>Use this only if you want to show a number other than the senderAddress for the recipient to respond to, or if you want to show an Alphanumeric port (Mask) in the SMS recipients phone.<br><br>If this is kept blank, senderAddress will be used in its place.<br><br>A Mask (Maximum 11 Char) has to be approved & configured by the ideabiz Support team before it can be used.<br><br>Mask cannot contain special characters such as ~!@#$%^&*_=+-()`;:'"/?.,<></p>
-			</td>
-			<td>
-			<p>string</p>
-			</td>
-			<td>
-			<p>Optional</p>
-			</td>
-		</tr>
-	</tbody>
-</table>
+| **Parameter Name** | **Description** | **Type** | **Mandatory /Optional** |
+| --- | --- | --- | --- |
+| address | At least one address must be provided. In this case it is the recipients MSISDN including the "tel:" protocol identifier and the country code preceded by "+".i.e., tel:+94766691500. OneAPI also supports the Anonymous Customer Reference (ACR) if provided by the operator. (However ACR is not supported in either versions of the SMSmessaging API) . | string | Mandatory |
+| senderAddress | This is the Port number configured for you, by the ideabiz Support team. This is also the address to which, the SMS recipient may send a reply SMS. (Unless the senderAddress is hidden by the use of senderName.(See below)) | string | Mandatory |
+| message | Must be provided within the outboundSMSTextMessage element. Messages over 160 characters may end up being sent as two or more messages by the operator. | string | Mandatory |
+| clientCorrelator | Uniquely identifies this SMS request. If there is a communication failure during the request, using the same clientCorrelator, when retrying, the request allows the operator to avoid sending the same SMS twice. | string | Mandatory |
+| notifyURL | The URL to which you would like to receive a notification of delivery of SMS. The format of this notification is shown below. (See [Delivery Notifications](#delivery-notifications)) | string | Optional.Keep empty or null if you don't want delivery notifications. |
+| callbackData | If Delivery Notifications were requested, this string will be passed back, so you can use it to identify the message, the receipt notification relates to (or any other useful data, such as a function name). This is only valid if notifications were requested. (See the notifyURL above) |  | Optional |
+| senderName | Use this only if you want to show a number other than the senderAddress for the recipient to respond to, or if you want to show an Alphanumeric port (Mask) in the SMS recipients phone. If this is kept blank, senderAddress will be used in its place. A Mask (Maximum 11 Char) has to be approved & configured by the ideabiz Support team before it can be used. Mask cannot contain special characters such as ~!@#$%^&*_=+-()`;:'"/?.,<> | string | Optional |
 
 <br>
 

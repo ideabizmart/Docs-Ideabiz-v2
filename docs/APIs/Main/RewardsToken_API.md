@@ -76,80 +76,13 @@ Body
 Given below are the Request parameters of Generate Rewards Token.
  
 
-<table border>
-	<tbody>
-		<tr>
-			<td style="width:18.7%;height:45px;">
-			<p><strong>Parameter name</strong></p>
-			</td>
-			<td style="width:63.62%;height:45px;">
-			<p><strong>Description</strong></p>
-			</td>
-			<td style="width:17.68%;height:45px;">
-			<p><strong>Usage</strong></p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:20px;">
-			<p>amount</p>
-			</td>
-			<td style="width:63.62%;height:20px;">
-			<p>(decimal) the value of the amount parameter will differ based on the {typeOfReward};</p>
-
-			<p>sms &ndash; The number of SMS</p>
-
-			<p>data &ndash; The amount of data in MB&nbsp;</p>
-			</td>
-			<td style="width:17.68%;height:20px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>callbackData</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(string) will be passed back in this notification. This is used to identify the tokens generated related to requests (or any other useful data, such as a function name). This is only valid if notifications are required</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Optional</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>clientCorrelator</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(string) uniquely identifies this request.</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>notifyURL</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(URI) the URL to which you would like to send the notification of redemption. &nbsp;(Currently cannot call external URL as micro-service server has no internet access)&nbsp;</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Reserved</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>rewardsTag</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(string) tag information for the rewards token</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Optional</p>
-			</td>
-		</tr>
-	</tbody>
-</table>
+| **Parameter name** | **Description** | **Usage** |
+| --- | --- | --- |
+| amount | (decimal) the value of the amount parameter will differ based on the {typeOfReward}; sms – The number of SMS data – The amount of data in MB | Mandatory |
+| callbackData | (string) will be passed back in this notification. This is used to identify the tokens generated related to requests (or any other useful data, such as a function name). This is only valid if notifications are required | Optional |
+| clientCorrelator | (string) uniquely identifies this request. | Mandatory |
+| notifyURL | (URI) the URL to which you would like to send the notification of redemption. (Currently cannot call external URL as micro-service server has no internet access) | Reserved |
+| rewardsTag | (string) tag information for the rewards token | Optional |
 
 
 <br>
@@ -176,103 +109,15 @@ Given below is a sample response of Generate Rewards Token.
 The following are the Response parameters of Generate Rewards Token. All Request parameters will be relayed in the response. Additionally pin and resourceURL parameters will be added to the response.
 
 
-<table border>
-	<tbody>
-		<tr>
-			<td style="width:18.7%;height:45px;">
-			<p><strong>Parameter name</strong></p>
-			</td>
-			<td style="width:63.62%;height:45px;">
-			<p><strong>Description</strong></p>
-			</td>
-			<td style="width:17.68%;height:45px;">
-			<p><strong>Usage</strong></p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:20px;">
-			<p>amount</p>
-			</td>
-			<td style="width:63.62%;height:20px;">
-			<p>(decimal) the value of the amount parameter will differ based on the {typeOfReward};</p>
-
-
-			<p>sms &ndash; The number of SMS</p>
-
-			<p>data &ndash; The amount of data in MB&nbsp;</p>
-			</td>
-			<td style="width:17.68%;height:20px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>pin</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(numeric) Unique PIN to redeem a generated token.</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>clientCorrelator</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(string) uniquely identifies this request.</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>callbackData</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(string) will be passed back in this notification. This is used to identify the tokens generated related to requests (or any other useful data, such as a function name). This is only valid if notifications are required</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Optional</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>notifyURL</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(URI) the URL to which you would like to send the notification of redemption.</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Reserved</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>rewardsTag</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(string) tag information for the rewards token</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Optional</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>resourceURL</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>A reference URL to the request</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-	</tbody>
-</table>
+| **Parameter name** | **Description** | **Usage** |
+| --- | --- | --- |
+| amount | (decimal) the value of the amount parameter will differ based on the {typeOfReward}; sms – The number of SMS data – The amount of data in MB | Mandatory |
+| pin | (numeric) Unique PIN to redeem a generated token. | Mandatory |
+| clientCorrelator | (string) uniquely identifies this request. | Mandatory |
+| callbackData | (string) will be passed back in this notification. This is used to identify the tokens generated related to requests (or any other useful data, such as a function name). This is only valid if notifications are required | Optional |
+| notifyURL | (URI) the URL to which you would like to send the notification of redemption. | Reserved |
+| rewardsTag | (string) tag information for the rewards token | Optional |
+| resourceURL | A reference URL to the request | Mandatory |
 
 
  <br>
@@ -331,76 +176,13 @@ Body
 Given below are the Request parameters of Redeem Rewards Token.
  
 
-<table border>
-	<tbody>
-		<tr>
-			<td style="width:18.7%;height:45px;">
-			<p><strong>Parameter name</strong></p>
-			</td>
-			<td style="width:63.62%;height:45px;">
-			<p><strong>Description</strong></p>
-			</td>
-			<td style="width:17.68%;height:45px;">
-			<p><strong>Usage</strong></p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>msisdn</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>Mobile number of the subscriber.</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>pin</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(numeric) Unique PIN to redeem a generated token.</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>clientCorrelator</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(string) uniquely identifies this request. If there is a communication failure during the request, by using the same clientCorrelator, it will avoid creating the same reward twice when retrying the request.</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>notifyURL</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(URI) the URL to which you would like to send the notification of redemption.</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Reserved</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>callbackData</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(string) will be passed back in this notification. This is used to identify the tokens generated related to requests (or any other useful data, such as a function name). This is only valid if notifications are required</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Optional</p>
-			</td>
-		</tr>
-	</tbody>
-</table>
+| **Parameter name** | **Description** | **Usage** |
+| --- | --- | --- |
+| msisdn | Mobile number of the subscriber. | Mandatory |
+| pin | (numeric) Unique PIN to redeem a generated token. | Mandatory |
+| clientCorrelator | (string) uniquely identifies this request. If there is a communication failure during the request, by using the same clientCorrelator, it will avoid creating the same reward twice when retrying the request. | Mandatory |
+| notifyURL | (URI) the URL to which you would like to send the notification of redemption. | Reserved |
+| callbackData | (string) will be passed back in this notification. This is used to identify the tokens generated related to requests (or any other useful data, such as a function name). This is only valid if notifications are required | Optional |
 
 
 <br>
@@ -427,102 +209,15 @@ Given below is a sample response of Redeem Rewards Token.
 The following are the Response parameters of Redeem Rewards Token. All request parameters will be relayed in the response. Additionally type and resourceURL parameters will be added to the response.
 
 
-<table border>
-	<tbody>
-		<tr>
-			<td style="width:18.7%;height:45px;">
-			<p><strong>Parameter name</strong></p>
-			</td>
-			<td style="width:63.62%;height:45px;">
-			<p><strong>Description</strong></p>
-			</td>
-			<td style="width:17.68%;height:45px;">
-			<p><strong>Usage</strong></p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:20px;">
-			<p>amount</p>
-			</td>
-			<td style="width:63.62%;height:20px;">
-			<p>(decimal) the value of the amount parameter will differ based on the {type};</p>
-
-			<p>sms &ndash; The number of SMS</p>
-
-			<p>data &ndash; The amount of data in MB&nbsp;</p>
-			</td>
-			<td style="width:17.68%;height:20px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:20px;">
-			<p>type</p>
-			</td>
-			<td style="width:63.62%;height:20px;">
-			<p>(string) the type of reward, if its sms or data.</p>
-			</td>
-			<td style="width:17.68%;height:20px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>pin</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(numeric) Unique PIN to redeem a generated token.</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>clientCorrelator</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(string) uniquely identifies this request.</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>callbackData</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(string) will be passed back in this notification. This is used to identify the tokens generated related to requests (or any other useful data, such as a function name). This is only valid if notifications are required.</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Optional</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>notifyURL</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(URI) the URL to which you would like to send the notification of redemption.</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Reserved</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>resourceURL</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>A reference URL to the request.</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-	</tbody>
-</table>
+| **Parameter name** | **Description** | **Usage** |
+| --- | --- | --- |
+| amount | (decimal) the value of the amount parameter will differ based on the {type}; sms – The number of SMS data – The amount of data in MB | Mandatory |
+| type | (string) the type of reward, if its sms or data. | Mandatory |
+| pin | (numeric) Unique PIN to redeem a generated token. | Mandatory |
+| clientCorrelator | (string) uniquely identifies this request. | Mandatory |
+| callbackData | (string) will be passed back in this notification. This is used to identify the tokens generated related to requests (or any other useful data, such as a function name). This is only valid if notifications are required. | Optional |
+| notifyURL | (URI) the URL to which you would like to send the notification of redemption. | Reserved |
+| resourceURL | A reference URL to the request. | Mandatory |
 
 
 <br>
@@ -586,102 +281,15 @@ The following are the Request parameters of Apply Rewards.
 
 
 
-<table border="1" >
-	<tbody>
-		<tr>
-			<td style="width:18.7%;height:45px;">
-			<p><strong>Parameter name</strong></p>
-			</td>
-			<td style="width:63.62%;height:45px;">
-			<p><strong>Description</strong></p>
-			</td>
-			<td style="width:17.68%;height:45px;">
-			<p><strong>Usage</strong></p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:20px;">
-			<p>msisdn</p>
-			</td>
-			<td style="width:63.62%;height:20px;">
-			<p>Mobile number of the subscriber.</p>
-			</td>
-			<td style="width:17.68%;height:20px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:20px;">
-			<p>type</p>
-			</td>
-			<td style="width:63.62%;height:20px;">
-			<p>(string) the type of reward, if its sms or data.</p>
-			</td>
-			<td style="width:17.68%;height:20px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:20px;">
-			<p>Amount</p>
-			</td>
-			<td style="width:63.62%;height:20px;">
-			<p>(decimal) the value of the amount parameter will differ based on the {type};</p>
-
-			<p>sms &ndash; The number of SMS</p>
-
-			<p>data &ndash; The amount of data in MB&nbsp;</p>
-			</td>
-			<td style="width:17.68%;height:20px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>clientCorrelator</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(string) uniquely identifies this request.</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>notifyURL</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(URI) the URL to which you would like to send the notification of redemption.</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Reserved</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>callbackData</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(string) will be passed back in this notification. This is used to identify the tokens generated related to requests (or any other useful data, such as a function name). This is only valid if notifications are required.</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Optional</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>smsText</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(string) Full SMS notification message.</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Optional</p>
-			</td>
-		</tr>
-	</tbody>
-</table>
+| **Parameter name** | **Description** | **Usage** |
+| --- | --- | --- |
+| msisdn | Mobile number of the subscriber. | Mandatory |
+| type | (string) the type of reward, if its sms or data. | Mandatory |
+| Amount | (decimal) the value of the amount parameter will differ based on the {type}; sms – The number of SMS data – The amount of data in MB | Mandatory |
+| clientCorrelator | (string) uniquely identifies this request. | Mandatory |
+| notifyURL | (URI) the URL to which you would like to send the notification of redemption. | Reserved |
+| callbackData | (string) will be passed back in this notification. This is used to identify the tokens generated related to requests (or any other useful data, such as a function name). This is only valid if notifications are required. | Optional |
+| smsText | (string) Full SMS notification message. | Optional |
 
 
 <br>
@@ -709,91 +317,14 @@ The following are the Response parameters of Apply Rewards.
 All request parameters will be relayed in the response. Additionally resourceURL parameter will be added to the response.
 
 
-<table border>
-	<tbody>
-		<tr>
-			<td style="width:18.7%;height:45px;">
-			<p><strong>Parameter name</strong></p>
-			</td>
-			<td style="width:63.62%;height:45px;">
-			<p><strong>Description</strong></p>
-			</td>
-			<td style="width:17.68%;height:45px;">
-			<p><strong>Usage</strong></p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:20px;">
-			<p>amount</p>
-			</td>
-			<td style="width:63.62%;height:20px;">
-			<p>(decimal) the value of the amount parameter will differ based on the {type};</p>
-
-			<p>sms &ndash; The number of SMS</p>
-
-			<p>data &ndash; The amount of data in MB&nbsp;</p>
-			</td>
-			<td style="width:17.68%;height:20px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>type</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(string) the type of reward, if its sms or data</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>clientCorrelator</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(string) uniquely identifies this request.</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>callbackData</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(string) will be passed back in this notification. This is used to identify the tokens generated related to requests (or any other useful data, such as a function name). This is only valid if notifications are required</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Optional</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>notifyURL</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>(URI) the URL to which you would like to send the notification of redemption.</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Reserved</p>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:18.7%;height:23px;">
-			<p>resourceURL</p>
-			</td>
-			<td style="width:63.62%;height:23px;">
-			<p>A reference URL to the request</p>
-			</td>
-			<td style="width:17.68%;height:23px;">
-			<p>Mandatory</p>
-			</td>
-		</tr>
-	</tbody>
-</table>
+| **Parameter name** | **Description** | **Usage** |
+| --- | --- | --- |
+| amount | (decimal) the value of the amount parameter will differ based on the {type}; sms – The number of SMS data – The amount of data in MB | Mandatory |
+| type | (string) the type of reward, if its sms or data | Mandatory |
+| clientCorrelator | (string) uniquely identifies this request. | Mandatory |
+| callbackData | (string) will be passed back in this notification. This is used to identify the tokens generated related to requests (or any other useful data, such as a function name). This is only valid if notifications are required | Optional |
+| notifyURL | (URI) the URL to which you would like to send the notification of redemption. | Reserved |
+| resourceURL | A reference URL to the request | Mandatory |
 
 
 

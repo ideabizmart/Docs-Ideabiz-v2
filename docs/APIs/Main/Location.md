@@ -76,170 +76,18 @@ Following is a sample response of Location service.
 Following are the Response parameters of Location service.
 
 
-<table border>
-	<tbody>
-		<tr>
-			<td>
-			<p align="center"><strong>Parameter name</strong></p>
-			</td>
-			<td>
-			<p align="center"><strong>Description</strong></p>
-			</td>
-			<td>
-			<p align="center"><strong>Type</strong></p>
-			</td>
-			<td>
-			<p align="center"><strong>Mandatory/Optional</strong></p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p style="margin-left:6pt;">terminalLocation</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">The terminal location information.</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">&nbsp;string</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p style="margin-left:6pt;">address</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">MSISDN of the mobile terminal to locate. in this case the recipients MSISDN including the &lsquo;tel:&rsquo; protocol identifier and the country code preceded by &lsquo;+&rsquo;.</p>
-
-			<p style="margin-left:6pt;">i.e. tel:+ 94771234567.</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">&nbsp;string</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p style="margin-left:6pt;">currentLocation</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Current location of the terminal.</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">&nbsp;string</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p style="margin-left:6pt;">accuracy</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Result accuracy in metres.</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">&nbsp;string</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p style="margin-left:6pt;">altitude</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Metres.</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">&nbsp;string</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p style="margin-left:6pt;">latitude</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Decimal Degrees, ISO 6709.</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">&nbsp;string</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p style="margin-left:6pt;">longitude</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Decimal Degrees, ISO 6709.</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">&nbsp;string</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p style="margin-left:6pt;">timestamp</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">DateTime format.</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">&nbsp;string</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p style="margin-left:6pt;">locationRetrievalStatus</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">NotRetrieved - Unable to retrieve the terminal location.</p>
-
-			<p style="margin-left:6pt;">Error - Error retrieving the terminal location.</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">&nbsp;string</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">&nbsp;</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p style="margin-left:6pt;">locationCheckWith"latitude&longitude"</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Use this format to check the location in Maps.</p>
-			<p style="margin-left:6pt;">latitude,longitude</p>
-			<p style="margin-left:6pt;">eg: 6.893967,79.857292</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">&nbsp;string</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">&nbsp;</p>
-			</td>
-		</tr>
-	</tbody>
-</table>
+| **Parameter name** | **Description** | **Type** | **Mandatory/Optional** |
+| --- | --- | --- | --- |
+| terminalLocation | The terminal location information. | string | Mandatory |
+| address | MSISDN of the mobile terminal to locate. in this case the recipients MSISDN including the ‘tel:’ protocol identifier and the country code preceded by ‘+’. i.e. tel:+ 94771234567. | string | Mandatory |
+| currentLocation | Current location of the terminal. | string | Mandatory |
+| accuracy | Result accuracy in metres. | string | Mandatory |
+| altitude | Metres. | string | Mandatory |
+| latitude | Decimal Degrees, ISO 6709. | string | Mandatory |
+| longitude | Decimal Degrees, ISO 6709. | string | Mandatory |
+| timestamp | DateTime format. | string | Mandatory |
+| locationRetrievalStatus | NotRetrieved - Unable to retrieve the terminal location. Error - Error retrieving the terminal location. | string |  |
+| locationCheckWith"latitude&longitude" | Use this format to check the location in Maps. latitude,longitude eg: 6.893967,79.857292 | string |  |
 
  <br>
 ## Response Codes

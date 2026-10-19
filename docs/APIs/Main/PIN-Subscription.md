@@ -1,4 +1,4 @@
-﻿
+
 
 This api allows user to subscribe an MSISDN on demand, upon successful verification of a SMS PIN number . MSISDN will not be subscribed to the application if incorrect PIN is entered.
 
@@ -197,145 +197,13 @@ POST
 }
 ```
 
-<table border="1">
-	<thead>
-		<tr>
-			<th>
-			<p><strong>Parameter Name</strong></p>
-			</th>
-			<th>
-			<p><strong>Description</strong></p>
-			</th>
-			<th>
-			<p><strong>Type</strong></p>
-			</th>
-			<th>
-			<p><strong>Mandatory /Optional</strong></p>
-			</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>
-			<p>client</p>
-			</td>
-			<td>
-			<p>Client type. values will be `WEBBROWSER`,`MOBILEAPP` 
-.</p>
-			</td>
-			<td>
-			<p>string</p>
-			</td>
-			<td>
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p>device</p>
-			</td>
-			<td>
-			<p>Type/OS of device `iPhone 6`,`Galaxy S5`,`PC` 
-.</p>
-			</td>
-			<td>
-			<p>string</p>
-			</td>
-			<td>
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p>version</p>
-			</td>
-			<td>
-			<p>OS/Device version `Android 6` , `iOS 5`, `Windows 10` 
-.</p>
-			</td>
-			<td>
-			<p>string</p>
-			</td>
-			<td>
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p>appCode</p>
-			</td>
-			<td>
-			<p>If you use app in  store, your app  identifier. if you use web browser, web url `lk.ideabiz.app.web` or `https://widget.ideabiz.lk/xxxxx`
-.</p>
-			</td>
-			<td>
-			<p>string</p>
-			</td>
-			<td>
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p>headers</p>
-			</td>
-			<td>
-			<p>Any special headers or data. For multiple data, use `;` to seperate
-.</p>
-			</td>
-			<td>
-			<p>string</p>
-			</td>
-			<td>
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p>remoteRef</p>
-			</td>
-			<td>
-			<p>If you have username/email for this user in your system or User specific identifier, sent it here.
-.</p>
-			</td>
-			<td>
-			<p>string</p>
-			</td>
-			<td>
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p>utmSource</p>
-			</td>
-			<td>
-			<p>If user installed your app via any referal, send it here. 
-			<br> How to catch referal in android : https://android-developers.googleblog.com/2017/11/google-play-referrer-api-track-and.html or https://developer.android.com/google/play/installreferrer/library.html
-			<br> for web, pass `referal` header to us. 
-.</p>
-			</td>
-			<td>
-			<p>string</p>
-			</td>
-			<td>
-			<p>Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p>IP</p>
-			</td>
-			<td>
-			<p>Client/User original IP
-.</p>
-			</td>
-			<td>
-			<p>string</p>
-			</td>
-			<td>
-			<p>Mandatory</p>
-			</td>
-		</tr>
-	</tbody>
-</table>
+| **Parameter Name** | **Description** | **Type** | **Mandatory /Optional** |
+| --- | --- | --- | --- |
+| client | Client type. values will be `WEBBROWSER`,`MOBILEAPP` . | string | Mandatory |
+| device | Type/OS of device `iPhone 6`,`Galaxy S5`,`PC` . | string | Mandatory |
+| version | OS/Device version `Android 6` , `iOS 5`, `Windows 10` . | string | Mandatory |
+| appCode | If you use app in store, your app identifier. if you use web browser, web url `lk.ideabiz.app.web` or `https://widget.ideabiz.lk/xxxxx` . | string | Mandatory |
+| headers | Any special headers or data. For multiple data, use `;` to seperate . | string | Mandatory |
+| remoteRef | If you have username/email for this user in your system or User specific identifier, sent it here. . | string | Mandatory |
+| utmSource | If user installed your app via any referal, send it here. How to catch referal in android : https://android-developers.googleblog.com/2017/11/google-play-referrer-api-track-and.html or https://developer.android.com/google/play/installreferrer/library.html for web, pass `referal` header to us. . | string | Mandatory |
+| IP | Client/User original IP . | string | Mandatory |

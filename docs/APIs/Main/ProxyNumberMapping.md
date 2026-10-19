@@ -1,4 +1,4 @@
-﻿/*
+/*
 ProxyNumberMapping
 Sort: 8
 */
@@ -141,120 +141,15 @@ Status code  : 200
 Given below are the Request parameters of the service.
  
 
-<table border>
-	<tbody>
-		<tr>
-			<td>
-			<p align="center"><strong>Parameter Name</strong></p>
-			</td>
-			<td>
-			<p align="center"><strong>Description</strong></p>
-			</td>
-			<td>
-			<p align="center"><strong>Type</strong></p>
-			</td>
-			<td>
-			<p align="center"><strong>Mandatory/Optional</strong></p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p style="margin-left:6pt;">a_party/b_party</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">In this case the a_party/b_party are the userss MSISDNs including the country code. Eg:94766691500.</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">string</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p style="margin-left:6pt;">a_party_ref_id</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">An unique reference for the User that identifies the User.</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">string</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p style="margin-left:6pt;">b_party_ref_id</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">An unique reference for the User that identifies the User.</p>
-			<td>
-			<p style="margin-left:6pt;">string</p>
-            </td>
-            <td>
-			<p style="margin-left:6pt;">string</p>
-            </td>
-			<td>
-			<p style="margin-left:6pt;">Mandatory</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<p style="margin-left:6pt;">a/b_party_type</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">D for Driver / C for Customer</p>
-			<td>
-			<p style="margin-left:6pt;">string</p>
-            </td>
-			<td>
-			<p style="margin-left:6pt;">Mandatory</p>
-			</td>
-		</tr>
-        <tr>
-			<td>
-			<p style="margin-left:6pt;">Short Code</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Short code allocated for the app</p>
-			<td>
-			<p style="margin-left:6pt;">string</p>
-            </td>
-			<td>
-			<p style="margin-left:6pt;">Mandatory</p>
-			</td>
-		</tr>
-        <tr>
-			<td>
-			<p style="margin-left:6pt;">time_out_period</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">Time duration in seconds [ 60 - for time out in 1 minute ]</p>
-			<td>
-			<p style="margin-left:6pt;">string</p>
-            </td>
-			<td>
-			<p style="margin-left:6pt;">Mandatory</p>
-			</td>
-		</tr>
-        <tr>
-			<td>
-			<p style="margin-left:6pt;">reference_id</p>
-			</td>
-			<td>
-			<p style="margin-left:6pt;">An unique reference id for scheduled job</p>
-			<td>
-			<p style="margin-left:6pt;">string</p>
-            </td>
-			<td>
-			<p style="margin-left:6pt;">Mandatory</p>
-			</td>
-		</tr>
-	</tbody>
-</table>
+| **Parameter Name** | **Description** | **Type** | **Mandatory/Optional** |
+| --- | --- | --- | --- |
+| a_party/b_party | In this case the a_party/b_party are the userss MSISDNs including the country code. Eg:94766691500. | string | Mandatory |
+| a_party_ref_id | An unique reference for the User that identifies the User. | string | Mandatory |
+| b_party_ref_id | An unique reference for the User that identifies the User. string | string | Mandatory |
+| a/b_party_type | D for Driver / C for Customer string | Mandatory |  |
+| Short Code | Short code allocated for the app string | Mandatory |  |
+| time_out_period | Time duration in seconds [ 60 - for time out in 1 minute ] string | Mandatory |  |
+| reference_id | An unique reference id for scheduled job string | Mandatory |  |
 
 
 
