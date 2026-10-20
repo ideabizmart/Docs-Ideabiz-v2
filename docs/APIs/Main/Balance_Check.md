@@ -35,17 +35,43 @@ Authorization: Bearer a92ba8hjgjhgjh3fa1609cabcd79
 Accept: application/json
 Content-Type: application/json
 ```
-### Encrypted MSISDN
-Please refer Header Enrichment (http://docs.ideabiz.lk/APIs/Header_Enrichment) document for encrypted MSISDNs.
+All API calls to Ideabiz require an OAuth 2.0 Bearer Access Token in the request headers.
+
+> [!TIP]
+> Need an Access Token? Follow the [Token Management Guide](../../Getting_Started/Token_Manegment.md) to generate or renew your token.
+## Key Concepts & Jargon Buster
+
+- **Prepaid vs. Postpaid**:
+  - **PREPAID**: The customer pays in advance. The `balance` field indicates their current available airtime (in LKR).
+  - **POSTPAID**: The customer pays monthly. The `creditLimit` indicates their maximum credit ceiling, and `balance` indicates their remaining unbilled credit limit.
+- **Plain MSISDN**: Standard mobile number formatted with country code (e.g., `94766691500`).
+- **Encrypted MSISDN**: An anonymous alphanumeric token obtained through [Header Enrichment](./Header_Enrichment.md) when the user browses on mobile data.
+
+---
+
 
 ## Balance Checking
 
 This allows you to send an SMS from your Web application to one or more addresses (MSISDNs).
 
 #### URL
+
+### Formatting the `{MSISDN}` Parameter
+
+The `{MSISDN}` in the URL must be formatted depending on whether you have a **Plain Number** or an **Encrypted Number**:
+
+#### Option A: Using a Plain Mobile Number
+- Use standard Sri Lankan international format: `947XXXXXXXX`.
+- **Do NOT** include `+`, `tel:`, dashes, or leading zeros.
+
+*Example URL:*
+```http
+https://ideabiz.lk/apicall/balancecheck/v3/94766691500/transactions/amount/balance
 ```
-https://ideabiz.lk/apicall/balancecheck/v3/{MSISDN}/transactions/amount/balance
-```
+
+#### Option B: Using an Encrypted MSISDN (from Header Enrichment)
+- If you detected the user's number via [Header Enrichment](./Header_Enrichment.md), the token must be URL-encoded with the `etel:` prefix.
+
 ```
 https://ideabiz.lk/apicall/balancecheck/v4/{MSISDN}/transactions/amount/balance
 ```
@@ -147,3 +173,8 @@ HTTP Respose code <code>503</code>
 }
 ```
 
+### Policy & Server Exceptions
+When an error occurs at the business or platform layer, the response will contain an exception structure:
+
+- **Policy Exception (`PLxxxx`)**: Violation of business rules (e.g., invalid subscriber account).
+- **Service Exception (`SVCxxxx`)**: Malformed parameters or input format errors.

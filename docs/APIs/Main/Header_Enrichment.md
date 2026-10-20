@@ -2,6 +2,11 @@
 
 Once you provide your URL to us, we will enable header enrichment for your IP based on your requirement.
 
+> [!IMPORTANT]
+> **Key Operational Requirements:**
+> 1. **Dialog Mobile Data Only:** The visitor **must** browse using Dialog mobile cellular data (3G/4G/5G). It **will not work over Wi-Fi** or fixed broadband connections.
+> 2. **URL Whitelisting:** You must provide your website URL to the Ideabiz team beforehand so Header Enrichment can be provisioned for your domain/IP.
+
 ##  Encrypted MSISDN
 This MSISDN is a unique identification of specific MSISDN. and its an alpha numeric string. but you can use it for charging and sms APIs
 
@@ -53,9 +58,15 @@ etel%3A9477-vl%251D%25A3%25F7%25AC%25E1%25AE%25C0%25AD%25FF
 ```
 
 
-##  Plain MSISDN
+## Key Terminology (Jargon Buster)
 
-Because of user privacy, we don't provide plain MSISDN for Header Enrichment feature
+- **MSISDN**: The telecom term for a mobile telephone number.
+- **Encrypted MSISDN**: For user privacy and security regulations, Dialog does not expose the customer's raw, plain phone number. Instead, a temporary encrypted token is provided. This token is accepted by Ideabiz Payment and SMS APIs.
+- **HTTP Header**: Background metadata sent by the browser or network to your server with every web request (like the return address on an envelope).
+- **Base64 & URL Encoding**: Standard methods to safely transmit special or binary characters across the internet without corruption.
+
+---
+
 
 ## Reading header
 
@@ -109,3 +120,13 @@ echo urlencode ($_SERVER['HTTP_MSISDN'])."<br>";
 ?>
 
 ```
+## How to Test Header Enrichment
+
+Use this test script to verify your setup before integrating with full payment or SMS flows.
+
+### Testing Checklist
+- [ ] Upload the script below as `test_he.php` to your whitelisted web server.
+- [ ] Take a smartphone equipped with an active **Dialog SIM card**.
+- [ ] Turn **OFF Wi-Fi**.
+- [ ] Turn **ON Mobile Data**.
+- [ ] Open the mobile browser and visit `https://yourdomain.com/test_he.php`.
