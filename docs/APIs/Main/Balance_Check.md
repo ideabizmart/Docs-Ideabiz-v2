@@ -39,7 +39,7 @@ All API calls to Ideabiz require an OAuth 2.0 Bearer Access Token in the request
 
 > [!TIP]
 > Need an Access Token? Follow the [Token Management Guide](../../Getting_Started/Token_Manegment.md) to generate or renew your token.
-## Key Concepts & Jargon Buster
+## Key Concepts
 
 - **Prepaid vs. Postpaid**:
   - **PREPAID**: The customer pays in advance. The `balance` field indicates their current available airtime (in LKR).
@@ -49,10 +49,6 @@ All API calls to Ideabiz require an OAuth 2.0 Bearer Access Token in the request
 
 ---
 
-
-## Balance Checking
-
-This allows you to send an SMS from your Web application to one or more addresses (MSISDNs).
 
 #### URL
 
@@ -70,7 +66,7 @@ https://ideabiz.lk/apicall/balancecheck/v3/94766691500/transactions/amount/balan
 ```
 
 #### Option B: Using an Encrypted MSISDN (from Header Enrichment)
-- If you detected the user's number via [Header Enrichment](./Header_Enrichment.md), the token must be URL-encoded with the `etel:` prefix.
+- If you detected the user's number via [Header Enrichment](./Header_Enrichment.md), the parameter must be URL-encoded with the `etel:` prefix.
 
 ```
 https://ideabiz.lk/apicall/balancecheck/v4/{MSISDN}/transactions/amount/balance
