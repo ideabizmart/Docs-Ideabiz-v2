@@ -1,7 +1,5 @@
 # IdeaBiz MSISDN Detect — Integration Guide
 
-> Consolidated documentation based on the updated MSISDN Detect integration sections.
-
 ## Contents
 
 - [Overview](#msisdn-detect-overview)
